@@ -1,0 +1,1 @@
+EmpresaParceiraClass.ts
