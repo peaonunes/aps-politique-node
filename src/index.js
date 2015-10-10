@@ -12,31 +12,30 @@ var router = require('./routes.js');
 var engine = Handlebars.create();
 HandlebarsLayouts.register(engine);
 
+var staticFilesDir = Path.join(__dirname, '../public');
+var baseViewsDir = Path.join(__dirname, '../views');
+
+// Server initialization
 var server = new Hapi.Server({
   connections: {
     routes: {
       files: {
-        relativeTo: Path.join(__dirname, '../public')
+        relativeTo: staticFilesDir
       }
     }
   }
 });
-server.connection({ port: 3000 });
+server.connection({ port: process.env.PORT || 3000 });
 
+// Plugin for static content serving
 server.register(Inert, function(err) {
   if (err) throw err;
+});
 
-  server.route({
-    method: 'GET',
-    path: '/static/{filepath*}',
-    handler: {
-      file(request) {
-        return request.params.filename;
-      }
-    }
-  })
-})
+// Routing configuration
+router.configureRoutes(server);
 
+// Templating engine configuration
 server.register(Vision, function(err) {
   if (err) throw err;
 
@@ -44,12 +43,13 @@ server.register(Vision, function(err) {
     engines: {
       html: engine
     },
-    relativeTo: Path.join(__dirname, '../views'),
+    relativeTo: baseViewsDir,
     path: 'pages',
     partialsPath: 'layouts'
   });
 });
 
+// Logging configuration
 server.register({
   register: Good,
   options: {
@@ -68,5 +68,3 @@ server.register({
   	console.log('Server running at:', server.info.uri);
   });
 });
-
-router.configureRoutes(server);
