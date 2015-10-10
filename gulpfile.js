@@ -1,6 +1,5 @@
 var gulp   = require('gulp');
 var tsc    = require('gulp-tsc');
-var shell = require('gulp-shell');
 var runseq = require('run-sequence');
 var tslint = require('gulp-tslint');
 
@@ -20,10 +19,6 @@ var paths = {
 
 gulp.task('default', function(callback) {
 	runseq('buildall', 'watch', callback);
-});
-
-gulp.task('run', function() {
-  shell.task([ 'nodemon --debug index.js' ]);
 });
 
 gulp.task('watch', function() {

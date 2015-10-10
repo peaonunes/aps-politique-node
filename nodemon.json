@@ -1,4 +1,3 @@
 {
-  "ignore" : [ "src/*" ],
-  "watch" : [ "templates/**/*", "build/**/*" ]
+  "ignore" : [ "src/*" ]
 }
