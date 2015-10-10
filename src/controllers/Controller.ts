@@ -1,7 +1,7 @@
 class Controller {
-    home(request, reply) {
-        reply("Oie mundo");
-    }
+  home(request, reply) {
+    reply.view('index');
+  }
 }
 
 export = Controller;
