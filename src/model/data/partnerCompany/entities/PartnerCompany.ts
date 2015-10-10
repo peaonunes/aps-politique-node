@@ -1,6 +1,6 @@
 import Address = require("../../common/Address");
 
-class PartnerCompanyClass{
+class PartnerCompany {
 
 	name : string;
 	branch : string;
@@ -11,15 +11,15 @@ class PartnerCompanyClass{
 	address : Address;
 
 	constructor(name : string, branch : string, background : string, support : string, support_proposal : string, partnership_type : string, address : Address){
-		this.name = 
-		this.branch = 
-		this.background = 
-		this.support = 
-		this.support_proposal = 
-		this.partnership_type = 
-		this.address = 
+		this.name = name;
+		this.branch = branch;
+		this.background = background;
+		this.support = support;
+		this.support_proposal = support_proposal;
+		this.partnership_type = partnership_type;
+		this.address = address;
 	}
 
 }
 
-export = PartnerCompanyClass;
+export = PartnerCompany;
