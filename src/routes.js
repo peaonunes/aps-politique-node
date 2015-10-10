@@ -12,7 +12,7 @@ function configureRoutes(server) {
         return request.params.filepath;
       }
     }
-  })
+  });
 
   // Regular routes for the application
 	server.route({
