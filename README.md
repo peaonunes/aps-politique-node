@@ -1,5 +1,9 @@
 # POLITIQUE-NODE
 
+Software Analysis and Design (http://www.cin.ufpe.br/~if718/)
+
+Team's website for the course and documents in http://cin.ufpe.br/~jpmc/aps/
+
 ## Instalação
 
 Primeiramente, você precisa do *node.js* v4.1.2, que pode ser encontrado [aqui](https://nodejs.org). Com o *node.js* instalado (e consequentemente, o *npm*), será necessária a instalação global do pacote npm *gulp*, e caso você queira facilitar sua vida, o pacote *nodemon*. Para instalá-los, basta executar o comando
