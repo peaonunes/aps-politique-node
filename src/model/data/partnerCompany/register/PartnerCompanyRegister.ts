@@ -9,20 +9,20 @@ class PartnerCompanyRegister {
 		this.repository = repository;
 	}
 
-	public insertPartnerCompany(partnerCompany: PartnerCompany) {
-		return this.repository.insertPartnerCompany(partnerCompany);
+	public insertPartnerCompany(partnerCompany: PartnerCompany, callback: (err: any, result?: Object, affected?: number) => void) : void {
+		this.repository.insertPartnerCompany(partnerCompany, callback);
 	}
 
-	public removePartnerCompany(partnerCompany: PartnerCompany) {
-		return this.repository.removePartnerCompany(partnerCompany);
+	public removePartnerCompany(partnerCompany: PartnerCompany, callback: (err: any) => void) : void {
+		this.repository.removePartnerCompany(partnerCompany, callback);
 	}
 
-	public updatePartnerCompany(partnerCompany: PartnerCompany) {
-		return this.repository.updatesPartnerCompany(partnerCompany);
+	public updatePartnerCompany(partnerCompany: PartnerCompany, callback: (err: any, result?: Object) => void) : void {
+		this.repository.updatePartnerCompany(partnerCompany, callback);
 	}
 
-	public getPartnerCompany(partnerCompany: PartnerCompany) {
-		return this.repository.getPartnerCompany(partnerCompany);
+	public getPartnerCompanies(callback: (err: any, docs: Object[]) => void): void {
+		return this.repository.getPartnerCompanies(callback);
 	}
 
 }

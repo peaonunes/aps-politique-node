@@ -4,31 +4,26 @@ import IPartnerCompanyRepository = require("../data/partnerCompany/repository/IP
 
 class PartnerCompanyControl {
 
-	registerPartnerCompany: PartnerCompanyRegister;
+	partnerCompanyRegister: PartnerCompanyRegister;
 
-	public constructor(repository: IPartnerCompanyRepository) {
-		this.registerPartnerCompany = new PartnerCompanyRegister(repository);
+	constructor(repository: IPartnerCompanyRepository) {
+		this.partnerCompanyRegister = new PartnerCompanyRegister(repository);
 	}
 
-	public insertPartnerCompany(partnerCompany: PartnerCompany) {
-		return this.registerPartnerCompany.insertPartnerCompany(partnerCompany);
+	insertPartnerCompany(partnerCompany: PartnerCompany, callback: (err: any, result?: Object, affected?: number) => void) : void {
+		this.partnerCompanyRegister.insertPartnerCompany(partnerCompany, callback);
 	}
 
-	public removePartnerCompany(partnerCompany: PartnerCompany) {
-		return this.registerPartnerCompany.removePartnerCompany(partnerCompany);
+	removePartnerCompany(partnerCompany: PartnerCompany, callback: (err: any) => void) : void {
+		this.partnerCompanyRegister.removePartnerCompany(partnerCompany, callback);
 	}
 
-	public updatePartnerCompany(partnerCompany: PartnerCompany) {
-		return this.registerPartnerCompany.updatePartnerCompany(partnerCompany);
+	updatePartnerCompany(partnerCompany: PartnerCompany, callback: (err: any, result?: Object) => void) : void {
+		this.partnerCompanyRegister.updatePartnerCompany(partnerCompany, callback);
 	}
 
-	public getPartnerCompany(partnerCompany: PartnerCompany) {
-		partnerCompany = this.registerPartnerCompany.getPartnerCompany(partnerCompany);
-		if(partnerCompany != null){
-			return partnerCompany;
-		} else {
-			// TODO: do something
-		}
+	getPartnerCompany(callback: (err: any, docs: Object[]) => void): void {
+		this.partnerCompanyRegister.getPartnerCompanies(callback);
 	}
 
 }
