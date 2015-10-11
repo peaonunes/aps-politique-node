@@ -1,28 +1,28 @@
-import RegisterPartnerCompany = require("../data/partnerCompany/register/RegisterPartnerCompany");
+import PartnerCompanyRegister = require("../data/partnerCompany/register/PartnerCompanyRegister");
 import PartnerCompany = require("../data/partnerCompany/entities/PartnerCompany");
-import IRepositoryPartnerCompany = require("../data/partnerCompany/repository/IRepositoryPartnerCompany");
+import IPartnerCompanyRepository = require("../data/partnerCompany/repository/IPartnerCompanyRepository");
 
 class PartnerCompanyControl {
 
-	registerPartnerCompany: RegisterPartnerCompany;
+	registerPartnerCompany: PartnerCompanyRegister;
 
-	constructor(repository: IRepositoryPartnerCompany) {
-		this.registerPartnerCompany = new RegisterPartnerCompany(repository);
+	public constructor(repository: IPartnerCompanyRepository) {
+		this.registerPartnerCompany = new PartnerCompanyRegister(repository);
 	}
 
-	insertPartnerCompany(partnerCompany: PartnerCompany) {
+	public insertPartnerCompany(partnerCompany: PartnerCompany) {
 		return this.registerPartnerCompany.insertPartnerCompany(partnerCompany);
 	}
 
-	removePartnerCompany(partnerCompany: PartnerCompany) {
+	public removePartnerCompany(partnerCompany: PartnerCompany) {
 		return this.registerPartnerCompany.removePartnerCompany(partnerCompany);
 	}
 
-	updatePartnerCompany(partnerCompany: PartnerCompany) {
+	public updatePartnerCompany(partnerCompany: PartnerCompany) {
 		return this.registerPartnerCompany.updatePartnerCompany(partnerCompany);
 	}
 
-	getPartnerCompany(partnerCompany: PartnerCompany) {
+	public getPartnerCompany(partnerCompany: PartnerCompany) {
 		partnerCompany = this.registerPartnerCompany.getPartnerCompany(partnerCompany);
 		if(partnerCompany != null){
 			return partnerCompany;

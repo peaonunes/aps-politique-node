@@ -1,6 +1,6 @@
 import PartnerCompany = require("../entities/PartnerCompany");
 
-interface IRepositoryPartnerCompany{
+interface IPartnerCompanyRepository {
 	
 	insertPartnerCompany(partnerCompany: PartnerCompany): boolean;
 	removePartnerCompany(partnerCompany: PartnerCompany): boolean;
@@ -9,4 +9,4 @@ interface IRepositoryPartnerCompany{
 
 }
 
-export = IRepositoryPartnerCompany;
+export = IPartnerCompanyRepository;
