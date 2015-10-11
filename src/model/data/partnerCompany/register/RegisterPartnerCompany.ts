@@ -9,8 +9,8 @@ class RegisterPartnerCompany {
 		this.repository = repository;
 	}
 
-	insertPartnerCompany(partnerCompany: PartnerCompany) {
-		return this.repository.insertPartnerCompany(partnerCompany);
+	insertPartnerCompany(partnerCompany: PartnerCompany, callback: (err: any, result?: Object, affected?: number) => void) : void {
+		return this.repository.insertPartnerCompany(partnerCompany, callback);
 	}
 
 	removePartnerCompany(partnerCompany: PartnerCompany) {
@@ -18,7 +18,7 @@ class RegisterPartnerCompany {
 	}
 
 	updatePartnerCompany(partnerCompany: PartnerCompany) {
-		return this.repository.updatesPartnerCompany(partnerCompany);
+		return this.repository.updatePartnerCompany(partnerCompany);
 	}
 
 	getPartnerCompany(partnerCompany: PartnerCompany) {

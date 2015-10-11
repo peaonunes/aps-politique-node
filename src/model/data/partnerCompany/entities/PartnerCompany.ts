@@ -9,17 +9,17 @@ class PartnerCompany {
 	branch : string;
 	background : string;
 	support : string;
-	support_proposal : string;
-	partnership_type : string;
+	supportProposal : string;
+	partnershipType : string;
 	address : Address;
 
-	constructor(name : string, branch : string, background : string, support : string, support_proposal : string, partnership_type : string, address : Address){
+	constructor(name : string, branch : string, background : string, support : string, supportProposal : string, partnershipType : string, address : Address){
 		this.name = name;
 		this.branch = branch;
 		this.background = background;
 		this.support = support;
-		this.support_proposal = support_proposal;
-		this.partnership_type = partnership_type;
+		this.supportProposal = supportProposal;
+		this.partnershipType = partnershipType;
 		this.address = address;
 	}
 
@@ -33,7 +33,7 @@ var PartnerCompanySchema = new mongoose.Schema({
 	background: { required: true, type: String },
 	support: { required: true, type: String }, 
 	support_proposal: { required: true, type: String },
-	partnership_type: { required: true, type: String },
+	partnershipType: { required: true, type: String },
 	address: { required: true, type: Address}
 
 })

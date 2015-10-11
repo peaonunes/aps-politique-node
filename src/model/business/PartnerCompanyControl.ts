@@ -10,8 +10,8 @@ class PartnerCompanyControl {
 		this.registerPartnerCompany = new RegisterPartnerCompany(repository);
 	}
 
-	insertPartnerCompany(partnerCompany: PartnerCompany) {
-		return this.registerPartnerCompany.insertPartnerCompany(partnerCompany);
+	insertPartnerCompany(partnerCompany: PartnerCompany, callback: (err: any, result?: Object, affected?: number) => void) {
+		return this.registerPartnerCompany.insertPartnerCompany(partnerCompany, callback);
 	}
 
 	removePartnerCompany(partnerCompany: PartnerCompany) {
