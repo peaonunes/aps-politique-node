@@ -11,15 +11,15 @@ class PartnerCompanyControl {
 	}
 
 	insertPartnerCompany(partnerCompany: PartnerCompany, callback: (err: any, result?: Object, affected?: number) => void) : void {
-		return this.partnerCompanyRegister.insertPartnerCompany(partnerCompany, callback);
+		this.partnerCompanyRegister.insertPartnerCompany(partnerCompany, callback);
 	}
 
 	removePartnerCompany(partnerCompany: PartnerCompany, callback: (err: any) => void) : void {
-		return this.partnerCompanyRegister.removePartnerCompany(partnerCompany, callback);
+		this.partnerCompanyRegister.removePartnerCompany(partnerCompany, callback);
 	}
 
-	updatePartnerCompany(partnerCompany: PartnerCompany) {
-		return this.partnerCompanyRegister.updatePartnerCompany(partnerCompany);
+	updatePartnerCompany(partnerCompany: PartnerCompany, callback: (err: any, result?: Object) => void) : void {
+		this.partnerCompanyRegister.updatePartnerCompany(partnerCompany, callback);
 	}
 
 	getPartnerCompany(partnerCompany: PartnerCompany) {

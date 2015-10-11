@@ -19,11 +19,14 @@ class PartnerCompanyRepositoryMongoose implements IPartnerCompanyRepository {
 		PartnerCompanyModel.remove({ _id : partnerCompany.id }, callback);
 	}
 
-	public updatePartnerCompany(partnerCompany:PartnerCompany) : boolean {
-		return undefined;
+	public updatePartnerCompany(partnerCompany:PartnerCompany, callback: <T extends Mongoose.Document>(err: any, result?: T) => void) : void {
+		var serializedCompany = PartnerCompanyModel.dehydrate(partnerCompany);
+		delete serializedCompany._id;
+
+        PartnerCompanyModel.findByIdAndUpdate(partnerCompany.id, { $set : serializedCompany }, callback);
 	}
 
-	public getPartnerCompany(partnerCompany:PartnerCompany):PartnerCompany {
+	public getPartnerCompany(partnerCompany:PartnerCompany) : PartnerCompany {
 		return undefined;
 	}
 

@@ -17,8 +17,8 @@ class PartnerCompanyRegister {
 		this.repository.removePartnerCompany(partnerCompany, callback);
 	}
 
-	public updatePartnerCompany(partnerCompany: PartnerCompany) {
-		return this.repository.updatePartnerCompany(partnerCompany);
+	public updatePartnerCompany(partnerCompany: PartnerCompany, callback: (err: any, result?: Object) => void) : void {
+		this.repository.updatePartnerCompany(partnerCompany, callback);
 	}
 
 	public getPartnerCompany(partnerCompany: PartnerCompany) {
