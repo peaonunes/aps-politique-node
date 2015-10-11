@@ -6,7 +6,7 @@ var Inert = require('inert');
 var Handlebars = require('handlebars');
 var HandlebarsLayouts = require('handlebars-layouts');
 var Path = require('path');
-var Mongoose = require('mongoose');
+var dbSetup = require('./model/data/database/mongodb/MongooseSetup');
 
 var router = require('./routes.js');
 
@@ -19,12 +19,7 @@ var baseViewsDir = Path.join(__dirname, '../views');
 var dbAddress = 'mongodb://localhost/politique';
 
 // Database connection setup
-Mongoose.connect(dbAddress);
-var dbConnection = Mongoose.connection;
-dbConnection.on('error', console.error.bind(console, 'connection error:'));
-dbConnection.once('open', function(callback) {
-  console.log(`Successfully connected to database at ${dbAddress}.`);
-});
+dbSetup(dbAddress);
 
 // Server initialization
 var server = new Hapi.Server({
