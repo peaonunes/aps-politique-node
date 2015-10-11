@@ -1,29 +1,29 @@
-import RegisterPartnerCompany = require("../data/partnerCompany/register/RegisterPartnerCompany");
+import PartnerCompanyRegister = require("../data/partnerCompany/register/PartnerCompanyRegister");
 import PartnerCompany = require("../data/partnerCompany/entities/PartnerCompany");
-import IRepositoryPartnerCompany = require("../data/partnerCompany/repository/IRepositoryPartnerCompany");
+import IPartnerCompanyRepository = require("../data/partnerCompany/repository/IPartnerCompanyRepository");
 
 class PartnerCompanyControl {
 
-	registerPartnerCompany: RegisterPartnerCompany;
+	partnerCompanyRegister: PartnerCompanyRegister;
 
-	constructor(repository: IRepositoryPartnerCompany) {
-		this.registerPartnerCompany = new RegisterPartnerCompany(repository);
+	constructor(repository: IPartnerCompanyRepository) {
+		this.partnerCompanyRegister = new PartnerCompanyRegister(repository);
 	}
 
-	insertPartnerCompany(partnerCompany: PartnerCompany, callback: (err: any, result?: Object, affected?: number) => void) {
-		return this.registerPartnerCompany.insertPartnerCompany(partnerCompany, callback);
+	insertPartnerCompany(partnerCompany: PartnerCompany, callback: (err: any, result?: Object, affected?: number) => void) : void {
+		return this.partnerCompanyRegister.insertPartnerCompany(partnerCompany, callback);
 	}
 
-	removePartnerCompany(partnerCompany: PartnerCompany) {
-		return this.registerPartnerCompany.removePartnerCompany(partnerCompany);
+	removePartnerCompany(partnerCompany: PartnerCompany, callback: (err: any) => void) : void {
+		return this.partnerCompanyRegister.removePartnerCompany(partnerCompany, callback);
 	}
 
 	updatePartnerCompany(partnerCompany: PartnerCompany) {
-		return this.registerPartnerCompany.updatePartnerCompany(partnerCompany);
+		return this.partnerCompanyRegister.updatePartnerCompany(partnerCompany);
 	}
 
 	getPartnerCompany(partnerCompany: PartnerCompany) {
-		partnerCompany = this.registerPartnerCompany.getPartnerCompany(partnerCompany);
+		partnerCompany = this.partnerCompanyRegister.getPartnerCompany(partnerCompany);
 		if(partnerCompany != null){
 			return partnerCompany;
 		} else {

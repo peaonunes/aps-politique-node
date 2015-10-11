@@ -1,12 +1,12 @@
 import PartnerCompany = require("../entities/PartnerCompany");
 
-interface IRepositoryPartnerCompany {
-
+interface IPartnerCompanyRepository {
+	
 	insertPartnerCompany(partnerCompany: PartnerCompany, callback: (err: any, result?: Object, affected?: number) => void): void;
-	removePartnerCompany(partnerCompany: PartnerCompany): boolean;
+	removePartnerCompany(partnerCompany: PartnerCompany, callback: (err: any) => void): void;
 	updatePartnerCompany(partnerCompany: PartnerCompany): boolean;
 	getPartnerCompany(partnerCompany: PartnerCompany): PartnerCompany;
 
 }
 
-export = IRepositoryPartnerCompany;
+export = IPartnerCompanyRepository;

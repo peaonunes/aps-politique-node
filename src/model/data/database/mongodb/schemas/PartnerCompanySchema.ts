@@ -47,11 +47,14 @@ PartnerCompanySchema.methods.hydrate = function() : PartnerCompany {
         address
     );
 
+    company.id = this._id;
+
     return company;
 };
 
 PartnerCompanySchema.statics.dehydrate = function(company: PartnerCompany) : Object {
     return {
+        _id: company.id,
         name: company.name,
         branch: company.branch,
         background: company.background,
