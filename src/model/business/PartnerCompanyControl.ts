@@ -22,13 +22,8 @@ class PartnerCompanyControl {
 		this.partnerCompanyRegister.updatePartnerCompany(partnerCompany, callback);
 	}
 
-	getPartnerCompany(partnerCompany: PartnerCompany) {
-		partnerCompany = this.partnerCompanyRegister.getPartnerCompany(partnerCompany);
-		if(partnerCompany != null){
-			return partnerCompany;
-		} else {
-			// TODO: do something
-		}
+	getPartnerCompany(callback: (err: any, docs: Object[]) => void): void {
+		this.partnerCompanyRegister.getPartnerCompanies(callback);
 	}
 
 }
