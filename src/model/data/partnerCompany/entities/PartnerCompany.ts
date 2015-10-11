@@ -1,5 +1,8 @@
 import Address = require("../../common/Address");
+//var mongoose = require('mongoose');
 
+
+// Class
 class PartnerCompany {
 
 	name : string;
@@ -21,5 +24,25 @@ class PartnerCompany {
 	}
 
 }
+/*
+// Schema 
+var PartnerCompanySchema = new mongoose.Schema({
 
+	name: { required: true, type: String },
+	branch: { required: true, type: String },
+	background: { required: true, type: String },
+	support: { required: true, type: String }, 
+	support_proposal: { required: true, type: String },
+	partnership_type: { required: true, type: String },
+	address: { required: true, type: Address}
+
+})
+
+// Interface for the mongoose
+//export interface PartnerCompanyDocument extends PartnerCompany, mongoose.Document { }
+
+// Model
+//export var PartnerCompanyModel = mongoose.model<PartnerCompanyDocument>('PartnerCompany', schema)
+*/
+// Export Class
 export = PartnerCompany;
