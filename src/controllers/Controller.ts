@@ -38,6 +38,14 @@ class Controller {
         });
     }
 
+    newEvent(request, reply) {
+        reply.view('cadastrarEvento');
+    }
+
+    newMember(request, reply) {
+        reply.view('cadastrarMembro');
+    }
+
     public login(request, reply) : void {
         reply('login');
     }

@@ -26,6 +26,16 @@ routes = [
   },
   {
     method: 'GET',
+    path: '/events/new',
+    name: "newEvent" // TODO: criar o método no controller
+  },
+  {
+    method: 'GET',
+    path: '/members/new',
+    name: "newMember" // TODO: criar o método no controller
+  },
+  {
+    method: 'GET',
     path: '/companies/search',
     name: "searchCompanies" // TODO: criar o método no controller
   },
