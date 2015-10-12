@@ -1,46 +1,38 @@
-{% extends "base.html" %}
+{{#extend "base"}}
+	{{#content "css"}}
+		<link rel="stylesheet" href="/static/css/homeStyle.css">
+	{{/content}}
 
-{% load staticfiles %}
+  {{#content "body"}}
+    <div id="home-container">
+      <div id="login-field">
 
-{% block css %}
-<link rel="stylesheet" href="{% static 'css/homeStyle.css' %}">
-{% endblock %}
+        <img id="login-img" src="/static/img/politique-logo.jpg">
 
-{% block body %}
+        <!-- Adicionar form -->
+        <form id="login-form" action="{{ getUrl 'login' }}" method="post">
+          <div>
+            <div class="login-form-div">
+              <label for="inputUsername">Username</label>
+              <input type="text" name="username" id="inputUsername" class="login-form-input" placeholder="Digite o seu nome de usuário">
+            </div>
 
-<div id="home-container">
-	<div id="login-field">
+            <div class="login-form-div">
+              <label for="inputPassword">Senha</label>
+              <input type="password" name="password" id="inputPassword" class="login-form-input" placeholder="Digite a sua senha">
+            </div>
 
-		<img id="login-img" src="{% static 'img/politique-logo.jpg' %}">
-		
-		<!-- Adicionar form -->
-		<form id="login-form" action="{% url 'Login' %}" method="post">
-			{% csrf_token %}
-			<div>
-				<div class="login-form-div">
-					<label for="inputUsername">Username</label>
-					<input type="text" name="username" id="inputUsername" class="login-form-input" placeholder="Digite o seu nome de usuário">
-				</div>
+            <div id="loginButtonDiv" class="login-form-div">
+              <input id="loginButton" type="submit" value="Entrar">
+            </div>
 
-				<div class="login-form-div">
-					<label for="inputPassword">Senha</label>
-					<input type="password" name="password" id="inputPassword" class="login-form-input" placeholder="Digite a sua senha">
-				</div>
+            <div id="forgotPasswordDiv" class="login-form-div">
+              <a id="forgotPassword" href="#">Esqueci minha senha!</a>
+            </div>
+          </div>
+        </form>
 
-				<div id="loginButtonDiv" class="login-form-div">
-					<input id="loginButton" type="submit" value="Entrar">
-				</div>
-
-				<div id="forgotPasswordDiv" class="login-form-div">
-					<a id="forgotPassword" href="#">Esqueci minha senha!</a>
-				</div>
-			</div>
-		</form>
-
-	</div>
-</div>
-
-{% endblock %}
-
-{% block scripts %}
-{% endblock %}
+      </div>
+    </div>
+  {{/content}}
+{{/extend}}

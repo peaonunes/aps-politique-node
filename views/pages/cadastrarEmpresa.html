@@ -1,59 +1,50 @@
-{% extends "baseInterna.html" %}
+{{#extend "baseinterna"}}
+  {{#content "css"}}
+    <link rel="stylesheet" href="/static/css/cadastrarEmpresaStyle.css">
+  {{/content}}
 
-{% load staticfiles %}
+  {{#content "mainTitle"}}Cadastrar Empresa{{/content}}
 
-{% block css %}
-<link rel="stylesheet" href="{% static 'css/cadastrarEmpresaStyle.css' %}">
-{% endblock %}
+  {{#content "body"}}
+    <form id="cadastrarEmpresa-form" action="{{ getUrl 'newPartnerCompany' }}" method="post">
+      <div class="cadastrar-form-div">
+        <label for="inputNome">Nome</label>
+        <input type="text" name="nome" id="inputNome" class="cadastrar-form-input" placeholder="">
+      </div>
 
-{% block main-title %}
-Cadastrar Empresa
-{% endblock %}
+      <div class="cadastrar-form-div">
+        <label for="inputRamo">Ramo de atuação</label>
+        <input type="text" name="ramoAtuacao" id="inputRamo" class="cadastrar-form-input" placeholder="">
+      </div>
 
-{% block body %}
-<form id="cadastrarEmpresa-form" action="{%url 'CadastrarEmpresa'%}" method="post">
-	{% csrf_token %}
-			<div class="cadastrar-form-div">
-		<label for="inputNome">Nome</label>
-		<input type="text" name="nome" id="inputNome" class="cadastrar-form-input" placeholder="">
-	</div>
+      <div class="cadastrar-form-div">
+        <label for="inputBackground">Background</label>
+        <input type="text" name="background" id="inputBackground" class="cadastrar-form-input" placeholder="">
+      </div>
 
-	<div class="cadastrar-form-div">
-		<label for="inputRamo">Ramo de atuação</label>
-		<input type="text" name="ramoAtuacao" id="inputRamo" class="cadastrar-form-input" placeholder="">
-	</div>
+      <div class="cadastrar-form-div">
+        <label for="inputApoios">Apoios</label>
+        <input type="text" name="apoios" id="inputApoios" class="cadastrar-form-input" placeholder="">
+      </div>
 
-	<div class="cadastrar-form-div">
-		<label for="inputBackground">Background</label>
-		<input type="text" name="background" id="inputBackground" class="cadastrar-form-input" placeholder="">
-	</div>
+      <div class="cadastrar-form-div">
+        <label for="inputProposta">Proposta de apoio</label><br />
+        <input type="text" name="propostaApoio" id="inputProposta" class="cadastrar-form-input" placeholder="">
+      </div>
 
-	<div class="cadastrar-form-div">
-		<label for="inputApoios">Apoios</label>
-		<input type="text" name="apoios" id="inputApoios" class="cadastrar-form-input" placeholder="">
-	</div>
+      <div class="atualizar-form-div">
+        <label for="tipoParceria">Tipo de Parceria</label><br />
+        {{ form.tipoParceria }}
+      </div>
 
-	<div class="cadastrar-form-div">
-		<label for="inputProposta">Proposta de apoio</label><br />
-		<input type="text" name="propostaApoio" id="inputProposta" class="cadastrar-form-input" placeholder="">
-	</div>
+      <div class="atualizar-form-div">
+        <label for="iniciativas">Iniciativas</label><br />
+        {{ form.iniciativas }}
+      </div>
 
-	<div class="atualizar-form-div">
-		<label for="tipoParceria">Tipo de Parceria</label><br />
-		{{ form.tipoParceria }}
-	</div>
-
-	<div class="atualizar-form-div">
-		<label for="iniciativas">Iniciativas</label><br />
-		{{ form.iniciativas }}
-	</div>
-
-	<div id="cadastrarButtonDiv" class="cadastrar-form-div">
-		<input id="cadastrarButton" type="submit" value="Cadastrar">
-	</div>
-</form>
-
-{% endblock %}
-
-{% block scripts %}
-{% endblock %}
+      <div id="cadastrarButtonDiv" class="cadastrar-form-div">
+        <input id="cadastrarButton" type="submit" value="Cadastrar">
+      </div>
+    </form>
+  {{/content}}
+{{/extend}}

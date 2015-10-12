@@ -1,18 +1,31 @@
 <html>
-	<head>
-		<meta http-equiv="Content-type" content="text/html"/>
-		<meta charset="utf-8"/>
-		<title>Politiquê</title>
-	</head>
-	<body>
-		<div class="page-wrap">
-			{{#block "body"}}
-      {{/block}}
-		</div>
-	</body>
+<head>
+	<meta http-equiv="Content-type" content="text/html"/>
+	<meta charset="utf-8"/>
 
-	<footer>
-		<div id="footer" class="container">
-		</div>
-	</footer>
+	<title>{{#block "title"}}Politiquê?{{/block}}</title>
+
+	<link rel="stylesheet" href="/static/css/baseStyle.css" type="text/css"/>
+
+	{{#block "css"}}
+	{{/block}}
+</head>
+<body>
+
+<div class="page-wrap">
+	{{#block "body"}}
+	{{/block}}
+</div>
+
+{{#block "scripts"}}
+{{/block}}
+</body>
+
+<footer>
+
+	<div id="footer" class="container">
+
+	</div>
+
+</footer>
 </html>
