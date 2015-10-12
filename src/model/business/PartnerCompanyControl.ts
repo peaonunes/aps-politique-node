@@ -22,7 +22,7 @@ class PartnerCompanyControl {
 		this.partnerCompanyRegister.updatePartnerCompany(partnerCompany, callback);
 	}
 
-	getPartnerCompany(callback: (err: any, docs: Object[]) => void): void {
+	getPartnerCompanies(callback: (err: any, docs: Object[]) => void): void {
 		this.partnerCompanyRegister.getPartnerCompanies(callback);
 	}
 

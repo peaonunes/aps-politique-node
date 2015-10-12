@@ -1,25 +1,56 @@
+// <reference path='../model/data/database/mongodb/mongoose.d.ts'/>
+
+import Mongoose = require('mongoose');
+
+import Facade = require('../model/Facade');
+import ERepositoryType = require("../model/data/utils/ERepositoryType");
+
+var PartnerCompanyModel = Mongoose.model('PartnerCompanies');
+
+const TEMPLATE_NAMES = {
+    HOME : 'home',
+    NEW_COMPANY: 'cadastrarEmpresa'
+};
+
 class Controller {
-    home(request, reply) {
-        reply.view('home');
+    private facade: Facade;
+
+    constructor() {
+        this.facade = new Facade(ERepositoryType.ERepositoryType.ERepositoryType.mongoose);
     }
 
-    newPartnerCompany(request, reply) {
-        reply.view('cadastrarEmpresa');
+    public home(request, reply) : void {
+        reply.view(TEMPLATE_NAMES.HOME);
     }
 
-    login(request, reply) {
+    public newPartnerCompany(request, reply) : void {
+        reply.view(TEMPLATE_NAMES.NEW_COMPANY);
+    }
+
+    public newPartnerCompanyPOST(request, reply) : void {
+        var partnerCompany = PartnerCompanyModel.hydrateFromPlainObject(request.payload);
+
+        this.facade.insertPartnerCompany(partnerCompany, (err, object) => {
+            if (err) throw err;
+
+            // TODO: mudar o template para o qual o usuário será redirecionado ao registrar a empresa
+            reply.view(TEMPLATE_NAMES.NEW_COMPANY);
+        });
+    }
+
+    public login(request, reply) : void {
         reply('login');
     }
 
-    logout(request, reply) {
+    public logout(request, reply) : void {
         reply('logout');
     }
 
-    profile(request, reply) {
+    public profile(request, reply) : void {
         reply('profile');
     }
 
-    searchCompanies(request, reply) {
+    public searchCompanies(request, reply) : void {
         reply('search for companies');
     }
 }
