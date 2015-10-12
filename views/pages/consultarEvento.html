@@ -1,198 +1,199 @@
-{% extends "baseInterna.html" %}
+{{#extend "baseinterna"}}
+  {{#content "css"}}
+    <link rel="stylesheet" href="/static/css/consultarEventoStyle.css">
+  {{/content}}
 
-{% load staticfiles %}
+  {{#content "mainTitle"}}Consultar Evento{{/content}}
 
-{% block css %}
-<link rel="stylesheet" href="{% static 'css/consultarEventoStyle.css' %}">
-{% endblock %}
 
-{% block main-title %}
-Consultar Evento
-{% endblock %}
+  {{#content "body"}}
 
-{% block body %}
-
-{% if form.errors %}
-<div id="form-error">
-	<p>The operation could not be performed because one or more error(s) occurred.<br />Please resubmit the form after making the following changes:</p>
-	<ul>
-		{% for field in form %}
-		<li> {{ field.name }} {{ field.errors|striptags }}</li>
-		{% endfor %}
-	</ul>
-</div>
-{% endif %}
-
-<!-- Modal editar Evento -->
-<div id="modalEditarEvento" hidden>
-
-	<h1>Editar Evento</h1>
-
-	<form action="#" method="POST" id="editarForm">
-		{% csrf_token %}
-		<div class="editar-form-div">
-			<label for="inputNome">Nome</label>
-			<input type="text" name="nome" id="inputNome" class="editar-form-input" placeholder="">
+		<!--{% if form.errors %}
+		<div id="form-error">
+			<p>The operation could not be performed because one or more error(s) occurred.<br />Please resubmit the form after making the following changes:</p>
+			<ul>
+				{% for field in form %}
+				<li> {{ field.name }} {{ field.errors|striptags }}</li>
+				{% endfor %}
+			</ul>
 		</div>
+		{% endif %}-->
 
-		<div class="editar-form-div">
-			<label for="inputData">Data</label>
-			<input type="date" name="data" id="inputData" class="editar-form-input" placeholder="" required>
+		<!-- Modal editar Evento -->
+		<div id="modalEditarEvento" hidden>
+
+			<h1>Editar Evento</h1>
+
+			<form action="#" method="POST" id="editarForm">
+				<div class="editar-form-div">
+					<label for="inputNome">Nome</label>
+					<input type="text" name="nome" id="inputNome" class="editar-form-input" placeholder="">
+				</div>
+
+				<div class="editar-form-div">
+					<label for="inputData">Data</label>
+					<input type="date" name="data" id="inputData" class="editar-form-input" placeholder="" required>
+				</div>
+
+				<div class="editar-form-div">
+					<label for="inputFeedback">FeedBack</label>
+					<input type="text" name="feedback" id="inputFeedback" class="editar-form-input" placeholder="">
+				</div>
+
+				<div class="editar-form-div">
+					<label for="cmbBoxEventoModal">Tipo de Evento</label><br />
+					<select id="cmbBoxEventoModal" name="tipoEvento">
+					  	<option value="1">Capacitação Interna</option>
+					  	<option value="2">Capacitação Externa</option>
+					  	<option value="3">Evento Institucional</option>
+					</select>
+				</div>	
+				
+				<div id="tipoEvento">
+				  <div class="editar-form-div">
+					   <label for="inputMaterial">Material</label>
+					   <input type="text" name="material" id="inputMaterial" class="editar-form-input" placeholder="">
+				  </div>
+			 	</div>
+
+				<div id="editarButtonDiv" class="editar-form-div">
+					<input id="editarButton" type="submit" value="Salvar">
+				</div>
+			</form>				
 		</div>
+		<!-- /.modal -->
 
-		<div class="editar-form-div">
-			<label for="inputFeedback">FeedBack</label>
-			<input type="text" name="feedback" id="inputFeedback" class="editar-form-input" placeholder="">
-		</div>
+		<form id="consultarEvento-form" action="{{getUrl 'serachEvents'}}" method="post"> <!-- action correto? -->
 
-		<div class="editar-form-div">
-			<label for="cmbBoxEventoModal">Tipo de Evento</label><br />
-			<select id="cmbBoxEventoModal" name="tipoEvento">
-			  	<option value="1">Capacitação Interna</option>
-			  	<option value="2">Capacitação Externa</option>
-			  	<option value="3">Evento Institucional</option>
-			</select>
-		</div>	
-		
-		<div id="tipoEvento">
-		  <div class="editar-form-div">
-			   <label for="inputMaterial">Material</label>
-			   <input type="text" name="material" id="inputMaterial" class="editar-form-input" placeholder="">
-		  </div>
-	 	</div>
+			<div class="consultar-form-div">
+				<label for="cmbBoxEvento">Tipo de Evento</label><br />
+				<select id="cmbBoxEvento" name="tipoEvento">
+				  	<option value="1">Capacitação Interna</option>
+				  	<option value="2">Capacitação Externa</option>
+				  	<option value="3">Evento Institucional</option>
+				</select>
+			</div>
 
-		<div id="editarButtonDiv" class="editar-form-div">
-			<input id="editarButton" type="submit" value="Salvar">
-		</div>
-	</form>				
-</div>
-<!-- /.modal -->
+			<div class="consultar-form-div">
+				<label for="inputEventosVar">Variável</label><br />
+				<select id="cmb-interna" class="cmb-variavel" name="inputEventosVar">
+					{% for instance in eventos1|slice:"1" %}
+						{% for field, value in instance.fields.items %}
+						{% if field != 'tipoEvento' %}
+						<option value="{{field}}">{{field}}</option>
+						{% endif %}
+						{% endfor %}
+						{% endfor %}
+				</select>
+				<select hidden id="cmb-externa" class="cmb-variavel" name="inputEventosVar">
+					{% for instance in eventos2|slice:"1" %}
+						{% for field, value in instance.fields.items %}
+						{% if field != 'tipoEvento' %}
+						<option value="{{field}}">{{field}}</option>
+						{% endif %}
+						{% endfor %}
+						{% endfor %}
+				</select>
+				<select hidden id="cmb-institucional" class="cmb-variavel" name="inputEventosVar">
+					{% for instance in eventos3|slice:"1" %}
+						{% for field, value in instance.fields.items %}
+						{% if field != 'empresasParceiras' and field != 'tipoEvento' %}
+						<option value="{{field}}">{{field}}</option>
+						{% endif %}
+						{% endfor %}
+						{% endfor %}
+				</select>
+			</div>
 
-<form id="consultarEvento-form" action="{%url 'ConsultarEvento'%}" method="post"> <!-- action correto? -->
-	{% csrf_token %}
+			<div class="consultar-form-div">
+				<label for="inputNome">Pesquisa</label>
+				<input type="text" name="first_name" id="inputPesquisa" class="consultar-form-input" placeholder="">
+			</div>
 
-	<div class="consultar-form-div">
-		<label for="cmbBoxEvento">Tipo de Evento</label><br />
-		<select id="cmbBoxEvento" name="tipoEvento">
-		  	<option value="1">Capacitação Interna</option>
-		  	<option value="2">Capacitação Externa</option>
-		  	<option value="3">Evento Institucional</option>
-		</select>
-	</div>
+			<div class="consultar-form-div">
+				<table id="tabela-interna">
+					<tr>
+						{% for instance in eventos1|slice:"1" %}
+						{% for field, value in instance.fields.items %}
+						{% if field != 'tipoEvento' %}
+						<th>{{field}}</th>
+						{% endif %}
+						{% endfor %}
+						{% endfor %}
+					</tr>
 
-	<div class="consultar-form-div">
-		<label for="inputEventosVar">Variável</label><br />
-		<select id="cmb-interna" class="cmb-variavel" name="inputEventosVar">
-			{% for instance in eventos1|slice:"1" %}
-				{% for field, value in instance.fields.items %}
-				{% if field != 'tipoEvento' %}
-				<option value="{{field}}">{{field}}</option>
-				{% endif %}
-				{% endfor %}
-				{% endfor %}
-		</select>
-		<select hidden id="cmb-externa" class="cmb-variavel" name="inputEventosVar">
-			{% for instance in eventos2|slice:"1" %}
-				{% for field, value in instance.fields.items %}
-				{% if field != 'tipoEvento' %}
-				<option value="{{field}}">{{field}}</option>
-				{% endif %}
-				{% endfor %}
-				{% endfor %}
-		</select>
-		<select hidden id="cmb-institucional" class="cmb-variavel" name="inputEventosVar">
-			{% for instance in eventos3|slice:"1" %}
-				{% for field, value in instance.fields.items %}
-				{% if field != 'empresasParceiras' and field != 'tipoEvento' %}
-				<option value="{{field}}">{{field}}</option>
-				{% endif %}
-				{% endfor %}
-				{% endfor %}
-		</select>
-	</div>
+					{% for instance in eventos1 %}
+					<tr onclick="ClickHandler(this, '{{instance.pk}}', '{{ csrf_token }}', event, '{% url 'RemoverCapacitacaoInterna' instance.pk %}', '{% url 'EditarCapacitacaoInterna' instance.pk %}')" class="tabela-linha linha-interna">
+						{% for field, value in instance.fields.items %}
+						{% if field != 'tipoEvento' %}
+						<td class="{{field}}">{{ value }}</td>
+						{% endif %}
+						{% endfor %}
+					</tr>
+						{% endfor %}
+				</table>
 
-	<div class="consultar-form-div">
-		<label for="inputNome">Pesquisa</label>
-		<input type="text" name="first_name" id="inputPesquisa" class="consultar-form-input" placeholder="">
-	</div>
+				<table hidden id="tabela-externa">
+					<tr>
+						{% for instance in eventos2|slice:"1" %}
+						{% for field, value in instance.fields.items %}
+						{% if field != 'tipoEvento' %}
+						<th>{{field}}</th>
+						{% endif %}
+						{% endfor %}
+						{% endfor %}
+					</tr>
 
-	<div class="consultar-form-div">
-		<table id="tabela-interna">
-			<tr>
-				{% for instance in eventos1|slice:"1" %}
-				{% for field, value in instance.fields.items %}
-				{% if field != 'tipoEvento' %}
-				<th>{{field}}</th>
-				{% endif %}
-				{% endfor %}
-				{% endfor %}
-			</tr>
+					{% for instance in eventos2 %}
+					<tr onclick="ClickHandler(this, '{{instance.pk}}', '{{ csrf_token }}', event, '{% url 'RemoverCapacitacaoExterna' instance.pk %}', '{% url 'EditarCapacitacaoExterna' instance.pk %}')" class="tabela-linha linha-externa">
+						{% for field, value in instance.fields.items %}
+						{% if field != 'tipoEvento' %}
+						<td class="{{field}}">{{ value }}</td>
+						{% endif %}
+						{% endfor %}
+					</tr>
+						{% endfor %}
+				</table>
 
-			{% for instance in eventos1 %}
-			<tr onclick="ClickHandler(this, '{{instance.pk}}', '{{ csrf_token }}', event, '{% url 'RemoverCapacitacaoInterna' instance.pk %}', '{% url 'EditarCapacitacaoInterna' instance.pk %}')" class="tabela-linha linha-interna">
-				{% for field, value in instance.fields.items %}
-				{% if field != 'tipoEvento' %}
-				<td class="{{field}}">{{ value }}</td>
-				{% endif %}
-				{% endfor %}
-			</tr>
-				{% endfor %}
-		</table>
+				<table hidden id="tabela-institucional">
+					<tr>
+						{% for instance in eventos3|slice:"1" %}
+						{% for field, value in instance.fields.items %}
+						{% if field != 'empresasParceiras' and field != 'tipoEvento' %}
+						<th>{{field}}</th>
+						{% endif %}
+						{% endfor %}
+						{% endfor %}
+					</tr>
 
-		<table hidden id="tabela-externa">
-			<tr>
-				{% for instance in eventos2|slice:"1" %}
-				{% for field, value in instance.fields.items %}
-				{% if field != 'tipoEvento' %}
-				<th>{{field}}</th>
-				{% endif %}
-				{% endfor %}
-				{% endfor %}
-			</tr>
+					{% for instance in eventos3 %}
+					<tr onclick="ClickHandler(this, '{{instance.pk}}', '{{ csrf_token }}', event, '{% url 'RemoverEventoInstitucional' instance.pk %}', '{% url 'EditarEventoInstitucional' instance.pk %}')" class="tabela-linha linha-institucional">
+						{% for field, value in instance.fields.items %}
+						{% if field != 'empresasParceiras' and field != 'tipoEvento' %}
+						<td class="{{field}}">{{ value }}</td>
+						{% endif %}
+						{% endfor %}
+					</tr>
+						{% endfor %}
+				</table>
+			</div>
 
-			{% for instance in eventos2 %}
-			<tr onclick="ClickHandler(this, '{{instance.pk}}', '{{ csrf_token }}', event, '{% url 'RemoverCapacitacaoExterna' instance.pk %}', '{% url 'EditarCapacitacaoExterna' instance.pk %}')" class="tabela-linha linha-externa">
-				{% for field, value in instance.fields.items %}
-				{% if field != 'tipoEvento' %}
-				<td class="{{field}}">{{ value }}</td>
-				{% endif %}
-				{% endfor %}
-			</tr>
-				{% endfor %}
-		</table>
+			<ul id="dropdown" role="menu" hidden aria-labelledby="menuitems">
+				<li><a href="#" data-toggle="modal" id="editarLink" onclick="showModal()">Editar Evento</a></li>
+				<li><a href="#" id="removerLink">Remover Evento</li>
+			</ul>
 
-		<table hidden id="tabela-institucional">
-			<tr>
-				{% for instance in eventos3|slice:"1" %}
-				{% for field, value in instance.fields.items %}
-				{% if field != 'empresasParceiras' and field != 'tipoEvento' %}
-				<th>{{field}}</th>
-				{% endif %}
-				{% endfor %}
-				{% endfor %}
-			</tr>
+		</form>
 
-			{% for instance in eventos3 %}
-			<tr onclick="ClickHandler(this, '{{instance.pk}}', '{{ csrf_token }}', event, '{% url 'RemoverEventoInstitucional' instance.pk %}', '{% url 'EditarEventoInstitucional' instance.pk %}')" class="tabela-linha linha-institucional">
-				{% for field, value in instance.fields.items %}
-				{% if field != 'empresasParceiras' and field != 'tipoEvento' %}
-				<td class="{{field}}">{{ value }}</td>
-				{% endif %}
-				{% endfor %}
-			</tr>
-				{% endfor %}
-		</table>
-	</div>
+  {{/content}}
 
-	<ul id="dropdown" role="menu" hidden aria-labelledby="menuitems">
-		<li><a href="#" data-toggle="modal" id="editarLink" onclick="showModal()">Editar Evento</a></li>
-		<li><a href="#" id="removerLink">Remover Evento</li>
-	</ul>
+{{/extend}}
 
-</form>
 
-{% endblock %}
 
-{% block scripts %}
+
+
+
+<!--{% block scripts %}
 <script src="{% static 'js/consultarEvento.js' %}"></script>
-{% endblock %}
+{% endblock %}-->

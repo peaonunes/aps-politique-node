@@ -9,7 +9,12 @@ var PartnerCompanyModel = Mongoose.model('PartnerCompanies');
 
 const TEMPLATE_NAMES = {
     HOME : 'home',
-    NEW_COMPANY: 'cadastrarEmpresa'
+    NEW_COMPANY: 'cadastrarEmpresa',
+    NEW_MEMBER:'cadastrarMembro',
+    NEW_EVENT:'cadastrarEvento',
+    SEARCH_COMPANY:'consultarEmpresa',
+    SEARCH_MEMBER:'consultarMembro',
+    SEARCH_EVENT:'consultarEvento'
 };
 
 class Controller {
@@ -38,12 +43,12 @@ class Controller {
         });
     }
 
-    newEvent(request, reply) {
-        reply.view('cadastrarEvento');
+    public newEvent(request, reply) : void{
+        reply.view(TEMPLATE_NAMES.NEW_EVENT);
     }
 
-    newMember(request, reply) {
-        reply.view('cadastrarMembro');
+    public newMember(request, reply) : void{
+        reply.view(TEMPLATE_NAMES.NEW_MEMBER);
     }
 
     public login(request, reply) : void {
@@ -59,8 +64,17 @@ class Controller {
     }
 
     public searchCompanies(request, reply) : void {
-        reply('search for companies');
+        reply(TEMPLATE_NAMES.SEARCH_COMPANY);
     }
+
+    public searchEvents(request, reply) : void {
+        reply(TEMPLATE_NAMES.SEARCH_MEMBER);
+    }
+
+    public searchMembers(request, reply) : void {
+        reply(TEMPLATE_NAMES.SEARCH_EVENT);
+    }
+
 }
 
 export = Controller;
