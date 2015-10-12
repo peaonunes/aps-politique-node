@@ -1,34 +1,27 @@
-{% extends "baseInterna.html" %}
-
-{% load staticfiles %}
-
-{% block css %}
+{{#extend "baseinterna"}}
+  {{#content "css"}}
 <link rel="stylesheet" href="{% static 'css/consultarMembroStyle.css' %}">
-{% endblock %}
+  {{/content}}
 
-{% block main-title %}
-Consultar Membro
-{% endblock %}
+{{#content "mainTitle"}}Consultar Membro{{/content}}
 
-{% block body %}
+{{#content "body"}}
+	{{#if form.errors}}
+	<div id="form-error">
+		<p>The operation could not be performed because one or more error(s) occurred.<br />Please resubmit the form after making the following changes:</p>
+		<ul>			
+			{{#each form.field}}
+			<li> {{this.name }} {{ this.errors|striptags }}</li>
+			{{/each}}
+		</ul>
+	</div>
+	{{/if}}
 
-{% if form.errors %}
-<div id="form-error">
-	<p>The operation could not be performed because one or more error(s) occurred.<br />Please resubmit the form after making the following changes:</p>
-	<ul>
-		{% for field in form %}
-		<li> {{ field.name }} {{ field.errors|striptags }}</li>
-		{% endfor %}
-	</ul>
-</div>
-{% endif %}
-
-<!-- Modal editar Membro -->
-<div id="modalEditarMembro" hidden>
+  <!-- Modal editar Membro -->
+  <div id="modalEditarMembro" hidden>
 
 	<h1>Editar Membro</h1>
 	<form action="#" method="POST" id="editarForm">
-		{% csrf_token %}
 		<div class="editar-form-div">
 			<label for="inputNome">Nome</label>
 			<input type="text" name="first_name" id="inputNome" class="editar-form-input" placeholder="">
@@ -58,19 +51,18 @@ Consultar Membro
 			<input id="editarButton" type="submit" value="Editar">
 		</div>
 	</form>				
-</div><!-- /.modal -->
+  </div><!-- /.modal -->
 
-<form id="consultarIniciativa-form" action="{%url 'ConsultarMembro'%}" method="post"> <!-- action correto? -->
-	{% csrf_token %}
+  <form id="consultarIniciativa-form" action="{%url 'ConsultarMembro'%}" method="post"> <!-- action correto? -->
 
 	<div class="consultar-form-div">
 		<label for="inputMembroVar">Variável</label><br />
 		<select name="inputMembroVar" id="cmb-variavel">
-			{% for instance in membros|slice:"1" %}
-			{% for field, value in instance.fields.items %}
-			<option value="{{field}}">{{field}}</option>
-			{% endfor %}
-			{% endfor %}
+			{{#each membros}}
+				{{#each this.fields.items}}
+					<option value="{{this}}">{{this}}</option>
+				{{/each}}
+			{{/each}}
 		</select>
 	</div>
 
@@ -82,20 +74,19 @@ Consultar Membro
 	<div class="consultar-form-div">
 		<table id="tabela">
 			<tr>
-				{% for instance in membros|slice:"1" %}
-				{% for field, value in instance.fields.items %}
-				<th>{{field}}</th>
-				{% endfor %}
-				{% endfor %}
+				{{#each membros}}
+					{{#each this.fields.items}}
+						<th>{{field}}</th>
+					{{/each}}
+				{{/each}}
 			</tr>
-
-			{% for instance in membros %}
-			<tr onclick="ClickHandler(this, '{{instance.pk}}', '{{ csrf_token }}', event, '{% url 'RemoverMembro' instance.pk %}', '{% url 'EditarMembro' instance.pk %}')" class="tabela-linha">
-				{% for field, value in instance.fields.items %}
-				<td class="{{field}}">{{ value }}</td>
-				{% endfor %}
-			</tr>
-			{% endfor %}
+			{{#each membros}}
+				<tr onclick="ClickHandler(this, '{{this.pk}}', event, '{% url 'RemoverMembro' this.pk %}', '{% url 'EditarMembro' this.pk %}')" class="tabela-linha">
+					{% for field, value in instance.fields.items %}
+					<td class="{{field}}">{{ value }}</td>
+					{% endfor %}
+				</tr>
+			{{/each}}
 		</table>
 	</div>
 
@@ -104,12 +95,11 @@ Consultar Membro
 		<li><a href="#" id="removerLink">Remover Membro</a></li>
 	</ul>
 
-</form>
+  </form>
 
-{% endblock %}
+{{/content}}
 
-{% block scripts %}
-
-<script src="{% static 'js/consultarMembroJS.js' %}"></script>
-
-{% endblock %}
+{{#content "scripts"}}
+    <script src="{% static 'js/consultarMembroJS.js' %}"></script>
+  {{/content}}
+{{/extend}}

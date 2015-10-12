@@ -1,30 +1,24 @@
-{% extends "baseInterna.html" %}
+{{#extend "baseinterna"}}
+  {{#content "css"}}
+    <link rel="stylesheet" href="{% static 'css/membroStyle.css' %}">
+  {{/content}}
 
-{% load staticfiles %}
+  {#content "mainTitle"}}Cadastrar Membro{{/content}}
 
-{% block css %}
-<link rel="stylesheet" href="{% static 'css/membroStyle.css' %}">
-{% endblock %}
+  {{#content "body"}}
 
-{% block main-title %}
-Cadastrar Membro
-{% endblock %}
-
-{% block body %}
-
-{% if form.errors %}
-<div id="form-error">
-	<p>The operation could not be performed because one or more error(s) occurred.<br />Please resubmit the form after making the following changes:</p>
-	<ul>
-	{% for field in form %}
-	<li> {{ field.name }} {{ field.errors|striptags }}</li>
-	{% endfor %}
-	</ul>
-</div>
-{% endif %}
+    {{#if form.errors}}
+      <div id="form-error">
+      <p>The operation could not be performed because one or more error(s) occurred.<br />Please resubmit the form after making the following changes:</p>
+      <ul>
+      {{#each form.field}}
+      <li> {{ this.name }} {{ this.errors|striptags }}</li>
+      {{/each}}
+      </ul>
+      </div>
+    {{/if}}
 
 	<form id="cadastrarMembro-form" action="{%url 'CadastrarMembro'%}" method="post">
-		{% csrf_token %}
 		<div class="atualizar-form-div">
 			<label for="inputNome">Nome</label>
 			<input type="text" name="first_name" id="inputNome" class="atualizar-form-input" placeholder="">
@@ -55,8 +49,5 @@ Cadastrar Membro
 		</div>
 
 	</form>
-
-{% endblock %}
-
-{% block scripts %}
-{% endblock %}
+  {{/content}}
+{{/extend}}
