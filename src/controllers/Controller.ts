@@ -7,6 +7,14 @@ class Controller {
         reply.view('cadastrarEmpresa');
     }
 
+    newEvent(request, reply) {
+        reply.view('cadastrarEvento');
+    }
+
+    newMember(request, reply) {
+        reply.view('cadastrarMembro');
+    }
+
     login(request, reply) {
         reply('login');
     }
