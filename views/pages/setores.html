@@ -1,16 +1,11 @@
-{% extends "baseInterna.html" %}
-
-{% load staticfiles %}
-
-{% block css %}
+{{#extend "baseinterna"}}
+  {{#content "css"}}
 <link rel="stylesheet" href="{% static 'css/setoresStyle.css' %}">
-{% endblock %}
+{{/content}}
 
-{% block main-title %}
-Setores
-{% endblock %}
+{{#content "mainTitle"}}Setores{{/content}}
 
-{% block body %}
+{{#content "body"}}
 
 {% if form.errors %}
 <div id="form-error">
@@ -28,7 +23,6 @@ Setores
 
 	<form id = "cadastrarSetor" action ="{%url 'CadastrarSetor'%}" method="post">
 
-		{% csrf_token %}
 		<div class="cadastrar-form-div">
 			<label for="inputNome">Nome</label>
 			<input type="text" name="nome" id="inputNome" class="cadastrar-form-input" placeholder="">
@@ -56,7 +50,6 @@ Setores
 	<h2 id="removerTitulo">Remover setor</h2>
 	
 	<form id = "removerSetor" action ="{%url 'RemoverSetor'%}" method="post">
-		{% csrf_token %}
 		<div class="cadastrar-form-div">
 			<label for="inputSetor">Setor</label><br/>
 			<select name="removeSetor">
@@ -74,7 +67,6 @@ Setores
 	</form>
 	
 </div>
-{% endblock %}
-
-{% block scripts %}
-{% endblock %}
+{{/content}}
+{{#content "scripts"}}
+{{/content}}
