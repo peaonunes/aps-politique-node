@@ -20,7 +20,7 @@ class Facade {
 	// Setup all the contols and repositories 
 	private init(repositoryType: ERepositoryType.ERepositoryType.ERepositoryType){
 		var repostitoryFactory = this.createRepositoryFactory(repositoryType);
-		this.createControls();
+		this.createControls(repostitoryFactory);
 	}
 
 	private createRepositoryFactory(repositoryType: ERepositoryType.ERepositoryType.ERepositoryType){
@@ -34,9 +34,11 @@ class Facade {
 		}
 	}
 
-	private createControls(){
+	private createControls(repositoryFactory: RepositoryBaseFactory){
 		// TODO: Create the controls of the application. We should give de repositories here.
-		//this.partnerCompanyControl = new PartnerCompanyControl();
+		this.partnerCompanyControl = new PartnerCompanyControl(
+			repositoryFactory.createRepositoryPartnerCompany()
+			);
 	}
 
 	// ###################################################################################
@@ -44,6 +46,7 @@ class Facade {
 	// ###################################################################################
 
 	//TODO:
+	
 }
 
 export = Facade;
