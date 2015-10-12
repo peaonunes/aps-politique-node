@@ -32,15 +32,66 @@
         <input type="text" name="propostaApoio" id="inputProposta" class="cadastrar-form-input" placeholder="">
       </div>
 
-      <div class="atualizar-form-div">
-        <label for="tipoParceria">Tipo de Parceria</label><br />
-        {{ form.tipoParceria }}
+      <div class="cadastrar-form-div">
+        <label for="inputParceria">Tipo de Parceria</label><br />
+        <input type="text" name="tipoParceria" id="inputParceria" class="cadastrar-form-input" placeholder="">
       </div>
 
-      <div class="atualizar-form-div">
+      <div class="cadastrar-form-div"><br/>
+        <form id="localizarEndereco-form" action="{{ getUrl 'newPartnerCompany' }}" method="post">
+          <label for="endereco">Endereço</label><br /> <br/>
+          <label for="inputCEP">CEP</label><br />
+          <input type="text" name="cep" id="inputCEP" class="cadastrar-form-input" placeholder="">
+
+          <div id="localizarButtonDiv" class="cadastrar-form-div">
+          <input id="localizarButton" type="submit" value="Localizar endereço">
+          </div>
+         
+          <label for="inputRua">Rua</label><br />
+          <input type="text" name="rua" id="inputRua" class="cadastrar-form-input" placeholder="">
+
+          <label for="inputNum">Num.</label><br />
+          <input type="number" name="num" id="inputNum" class="cadastrar-form-input" placeholder="">
+
+          <label for="inputBairro">Bairro</label><br />
+          <input type="text" name="bairro" id="inputBairro" class="cadastrar-form-input" placeholder="">
+
+          <label for="inputCidade">Cidade</label><br />
+          <input type="text" name="cidade" id="inputCidade" class="cadastrar-form-input" placeholder="">
+
+          <label for="inputEstado">Estado</label><br />
+          <input type="text" name="estado" id="inputEstado" class="cadastrar-form-input" placeholder="">
+
+        </form>
+      </div>
+
+      <div class="cadastrar-form-div"><br/>
+        <label for="endereco">Endereço</label><br /> <br/>
+        
+        <label for="inputRua">Rua</label><br />
+        <input type="text" name="rua" id="inputRua" class="cadastrar-form-input" placeholder="">
+
+        <label for="inputNum">Num.</label><br />
+        <input type="number" name="num" id="inputNum" class="cadastrar-form-input" placeholder="">
+
+        <label for="inputBairro">Bairro</label><br />
+        <input type="text" name="bairro" id="inputBairro" class="cadastrar-form-input" placeholder="">
+
+        <label for="inputCidade">Cidade</label><br />
+        <input type="text" name="cidade" id="inputCidade" class="cadastrar-form-input" placeholder="">
+
+        <label for="inputEstado">Estado</label><br />
+        <input type="text" name="estado" id="inputEstado" class="cadastrar-form-input" placeholder="">
+
+        <label for="inputCEP">CEP</label><br />
+        <input type="text" name="cep" id="inputCEP" class="cadastrar-form-input" placeholder="">
+      </div>
+
+
+      <!-- <div class="atualizar-form-div">
         <label for="iniciativas">Iniciativas</label><br />
         {{ form.iniciativas }}
-      </div>
+      </div> -->
 
       <div id="cadastrarButtonDiv" class="cadastrar-form-div">
         <input id="cadastrarButton" type="submit" value="Cadastrar">
