@@ -1,0 +1,76 @@
+<html>
+	<head>
+		<meta http-equiv="Content-type" content="text/html"/>
+		<meta charset="utf-8"/> 
+		{% load staticfiles %}
+
+		<title>{% block title %}Politiquê?{% endblock %}</title>
+
+		<link rel="stylesheet" href="{% static 'css/baseStyle.css' %}" type="text/css"/>
+		<link rel="stylesheet" href="{% static 'css/baseInternaStyle.css' %}" type="text/css"/>
+
+		{% block css %}
+		{% endblock %}
+	</head>
+	<body>
+		<div class="page-wrap">
+			<div class="navbar">
+				<div class="container">
+					<a id="img-link" href="{% url 'perfil' %}"><img id="navbar-img" src="{% static 'img/politique-logo.jpg' %}"/></a>
+
+					<a id="logoutBtn" href="{% url 'Logout' %}"><img id="logoutImg" src="{% static 'img/logout.png' %}"></a>
+					
+					<a id="welcome-navbar" href="{% url 'perfil' %}">Olá, {{ request.user.first_name }}!</a>
+				</div>
+			</div>
+		
+			<div class="container">
+				<div class="menu">
+					<ul>
+						<li id="first">Menu</li>
+						<a href="{% url 'Setor' %}"><li>Setores</li></a>
+						<li class="btn-show">Cadastrar</li>
+						<div class="hdn">
+							<a href="{% url 'CadastrarIniciativa' %}"><li>Cadastrar Iniciativa</li></a>
+							<a href="{% url 'CadastrarEvento' %}"><li>Cadastrar Evento</li></a>
+							<a href="{% url 'CadastrarEmpresa' %}"><li>Cadastrar Empresa</li></a>
+							<a href="{% url 'CadastrarMembro' %}"><li>Cadastrar Membro</li></a>
+							<a href="{% url 'CadastrarFinanciamento' %}"><li>Cadastrar Financiamento</li></a>
+						</div>
+						<li class="last consulta btn-show">Consultar</li>
+						<div class="hdn">
+							<!--<a href="#"><li>Consulta Genérica</li></a>-->
+							<a href="{% url 'ConsultarIniciativa' %}"><li>Consultar Iniciativa</li></a>
+							<a href="{% url 'ConsultarEvento' %}"><li>Consultar Evento</li></a>
+							<a href="{% url 'ConsultarEmpresa' %}"><li>Consultar Empresa</li></a>
+							<a href="{% url 'ConsultarMembro' %}"><li>Consultar Membro</li></a>
+							<a href="{% url 'ConsultarFinanciamento' %}"><li class="last">Consultar Financiamento</li></a>
+						</div>
+					</ul>
+				</div>
+
+				<div class="main">
+					<div class="wrap-txt">
+						<h1 class="main-title">{% block main-title %}{% endblock %}</h1>
+						{% block body %}
+						{% endblock %}
+					</div>
+				</div>
+			</div>		
+		</div>
+		<footer>
+
+			<div id="footer" class="container">
+
+			</div>
+
+		</footer>
+
+		<script src="{% static 'js/jquery-1.11.1.min.js' %}"></script>
+		<script src="{% static 'js/main.js' %}"></script>
+		{% block scripts %}
+		{% endblock %}
+
+	</body>
+
+</html>

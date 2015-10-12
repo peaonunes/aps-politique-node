@@ -1,6 +1,6 @@
 class Controller {
   home(request, reply) {
-    reply.view('index');
+    reply.view('home');
   }
 }
 
