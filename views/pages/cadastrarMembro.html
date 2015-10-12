@@ -1,24 +1,12 @@
 {{#extend "baseinterna"}}
   {{#content "css"}}
-    <link rel="stylesheet" href="/static/ccss/membroStyle.css">
+    <link rel="stylesheet" href="/static/css/membroStyle.css">
   {{/content}}
 
   {{#content "mainTitle"}}Cadastrar Membro{{/content}}
 
 
   {{#content "body"}}
-
-	  <!--{% if form.errors %}
-		<div id="form-error">
-			<p>The operation could not be performed because one or more error(s) occurred.<br />Please resubmit the form after making the following changes:</p>
-			<ul>
-			{% for field in form %}
-			<li> {{ field.name }} {{ field.errors|striptags }}</li>
-			{% endfor %}
-			</ul>
-		</div>
-		{% endif %}-->
-
 		<form id="cadastrarMembro-form" action="{{getUrl 'newMember'}}" method="post">
 			<div class="atualizar-form-div">
 				<label for="inputNome">Nome</label>
