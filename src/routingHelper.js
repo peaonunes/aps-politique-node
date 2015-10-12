@@ -28,6 +28,11 @@ routes = [
     method: 'GET',
     path: '/companies/search',
     name: "searchCompanies" // TODO: criar o método no controller
+  },
+  {
+    method: 'POST',
+    path: '/companies/new',
+    name: 'newPartnerCompanyPOST'
   }
 ];
 

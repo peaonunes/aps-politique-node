@@ -47,11 +47,21 @@ class Facade {
 	// ###################################################################################
 
 	//TODO:
-	public insertPartnerCompany(callback: (err: any, company: Object) => void) : void {
-		var company: PartnerCompany;
-
+	public insertPartnerCompany(company: PartnerCompany, callback: (err: any, company: Object) => void) : void {
 		this.partnerCompanyControl.insertPartnerCompany(company, callback);
 	}
+
+    public removePartnerCompany(company: PartnerCompany, callback: (err: any) => void) : void {
+        this.partnerCompanyControl.removePartnerCompany(company, callback);
+    }
+
+    public updatePartnerCompany(company: PartnerCompany, callback: (err: any, company: Object) => void) : void {
+        this.partnerCompanyControl.updatePartnerCompany(company, callback)
+    }
+
+    public getPartnerCompanies(callback: (err: any, companies: Object[]) => void) : void {
+        this.partnerCompanyControl.getPartnerCompanies(callback);
+    }
 }
 
 export = Facade;

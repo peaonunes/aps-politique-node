@@ -1,7 +1,7 @@
 import Mongoose = require('mongoose');
 import PartnerCompanySchema = require('./schemas/PartnerCompanySchema');
 
-function setup(dbAddress: string): void {
+function setup(dbAddress: string, callback: () => void): void {
     Mongoose.connect(dbAddress);
     var dbConnection = Mongoose.connection;
 
@@ -10,6 +10,8 @@ function setup(dbAddress: string): void {
         console.log(`Successfully connected to database at ${dbAddress}.`);
 
         Mongoose.model('PartnerCompanies', PartnerCompanySchema);
+
+        callback();
     });
 }
 
