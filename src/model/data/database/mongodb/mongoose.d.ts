@@ -235,6 +235,7 @@ declare module "mongoose" {
         $where(argument: Function): Query<T>;
 
         dehydrate: any;
+        hydrateFromPlainObject: any;
 
         base: Mongoose;
         collection: Collection;

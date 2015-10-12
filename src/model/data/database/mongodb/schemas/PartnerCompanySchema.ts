@@ -52,6 +52,29 @@ PartnerCompanySchema.methods.hydrate = function() : PartnerCompany {
     return company;
 };
 
+PartnerCompanySchema.statics.hydrateFromPlainObject = function(companyObject: any) : PartnerCompany {
+    var address = new Address(
+        companyObject.address.street,
+        companyObject.address.num,
+        companyObject.address.neighborhood,
+        companyObject.address.city,
+        companyObject.address.state,
+        companyObject.address.zip
+    );
+
+    var company = new PartnerCompany(
+        companyObject.name,
+        companyObject.branch,
+        companyObject.background,
+        companyObject.support,
+        companyObject.supportProposal,
+        companyObject.partnershipType,
+        address
+    );
+
+    return company;
+};
+
 PartnerCompanySchema.statics.dehydrate = function(company: PartnerCompany) : Object {
     return {
         _id: company.id,
