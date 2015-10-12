@@ -51,7 +51,8 @@ server.register(Vision, function(err) {
     },
     relativeTo: baseViewsDir,
     path: 'pages',
-    partialsPath: 'layouts'
+    partialsPath: 'layouts',
+    helpersPath: '../src/viewHelpers'
   });
 });
 

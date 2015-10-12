@@ -1,7 +1,27 @@
 class Controller {
-  home(request, reply) {
-    reply.view('home');
-  }
+    home(request, reply) {
+        reply.view('home');
+    }
+
+    newPartnerCompany(request, reply) {
+        reply.view('cadastrarEmpresa');
+    }
+
+    login(request, reply) {
+        reply('login');
+    }
+
+    logout(request, reply) {
+        reply('logout');
+    }
+
+    profile(request, reply) {
+        reply('profile');
+    }
+
+    searchCompanies(request, reply) {
+        reply('search for companies');
+    }
 }
 
 export = Controller;

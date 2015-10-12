@@ -1,4 +1,5 @@
 import PartnerCompanyControl = require("./business/PartnerCompanyControl");
+import PartnerCompany = require('./data/partnerCompany/entities/PartnerCompany');
 import IPartnerCompanyRepository = require("./data/partnerCompany/repository/IPartnerCompanyRepository");
 import ERepositoryType = require("./data/utils/ERepositoryType");
 import RepositoryBaseFactory = require("./data/utils/RepositoryBaseFactory");
@@ -46,7 +47,11 @@ class Facade {
 	// ###################################################################################
 
 	//TODO:
-	
+	public insertPartnerCompany(callback: (err: any, company: Object) => void) : void {
+		var company: PartnerCompany;
+
+		this.partnerCompanyControl.insertPartnerCompany(company, callback);
+	}
 }
 
 export = Facade;

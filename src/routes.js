@@ -1,5 +1,8 @@
 var Controller = require('./controllers/Controller');
+var routingHelper = require('./routingHelper');
 
+var routes = routingHelper.routes;
+var setupRoute = routingHelper.setupRoute;
 var controller = new Controller();
 
 function configureRoutes(server) {
@@ -14,12 +17,9 @@ function configureRoutes(server) {
     }
   });
 
-  // Regular routes for the application
-	server.route({
-		method: 'GET',
-		path: '/',
-		handler: controller.home
-	});
+  for (var i = 0; i < routes.length; i++) {
+    setupRoute(server, routes[i], controller);
+  }
 }
 
 module.exports = {
