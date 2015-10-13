@@ -1,52 +1,49 @@
-{% extends "baseInterna.html" %}
+{{#extend "baseinterna"}}
+  {{#content "css"}}
+	<link rel="stylesheet" href="{% static 'css/perfilStyle.css' %}">
+  {{/content}}
 
-{% load staticfiles %}
+{{#content "body"}}
 
-{% block css %}
-<link rel="stylesheet" href="{% static 'css/perfilStyle.css' %}">
-{% endblock %}
+	<div id="perfil-head">
 
-{% block body %}
+		<div id="perfil-img">
 
-<div id="perfil-head">
+		</div>
 
-	<div id="perfil-img">
+		<div id="presentation">
+			<h1>Bem vindo, {{ request.user.first_name }}!</h1>
+			<h2>{{ request.user.username }}</h2>
+			<h2>Setor: {{ request.user.setor }}</h2>
+			<!--<div id="editPerfilDiv">
+				<span id="editPerfil" onclick="goAtualizarPerfil();">Editar Perfil</span>
+			</div>-->
+
+		</div>
 
 	</div>
 
-	<div id="presentation">
-		<h1>Bem vindo, {{ request.user.first_name }}!</h1>
-		<h2>{{ request.user.username }}</h2>
-		<h2>Setor: {{ request.user.setor }}</h2>
-		<!--<div id="editPerfilDiv">
-			<span id="editPerfil" onclick="goAtualizarPerfil();">Editar Perfil</span>
-		</div>-->
+	<!--<table id="perfil-table">
+		<thead>
+			<tr>
+				<th id="atividade-tab">Atividade</th>
+				<th class="last-cell">Nome</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>Promover palestras</td>
+				<td class="last-cell">Iniciativa 1</td>
+			</tr>
+			<tr class="last-line">
+				<td>Propagar política nas escolas</td>
+				<td class="last-cell">Evento 4</td>
+			</tr>
+		</tbody>
+	</table>-->
 
-	</div>
+{{/content}}
 
-</div>
-
-<!--<table id="perfil-table">
-	<thead>
-		<tr>
-			<th id="atividade-tab">Atividade</th>
-			<th class="last-cell">Nome</th>
-		</tr>
-	</thead>
-	<tbody>
-		<tr>
-			<td>Promover palestras</td>
-			<td class="last-cell">Iniciativa 1</td>
-		</tr>
-		<tr class="last-line">
-			<td>Propagar política nas escolas</td>
-			<td class="last-cell">Evento 4</td>
-		</tr>
-	</tbody>
-</table>-->
-
-{% endblock %}
-
-{% block scripts %}
-<script src="{% static 'js/perfil.js' %}"></script>
-{% endblock %}
+{{#content "scripts"}}
+	<script src="{% static 'js/perfil.js' %}"></script>
+{{/content}}

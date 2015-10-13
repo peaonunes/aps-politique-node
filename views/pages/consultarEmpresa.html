@@ -8,17 +8,6 @@
 
   {{#content "body"}}
 
-		<!--{% if form.errors %}
-		<div id="form-error">
-			<p>The operation could not be performed because one or more error(s) occurred.<br />Please resubmit the form after making the following changes:</p>
-			<ul>
-				{% for field in form %}
-				<li> {{ field.name }} {{ field.errors|striptags }}</li>
-				{% endfor %}
-			</ul>
-		</div>
-		{% endif %}-->
-
 		<!-- Modal editar Empresa -->
 		<div id="modalEditarEmpresa" hidden>
 
@@ -112,15 +101,14 @@
 
   {{/content}}
 
+
+{{#content "scripts"}}
+	<script src="/static/js/consultarEmpresaJS.js"></script>
+{{/content}}
+
 {{/extend}}
 
 
 
 
 
-
-<!--{% block scripts %}
-
-<script src="{% static 'js/consultarEmpresaJS.js' %}"></script>
-
-{% endblock %}-->

@@ -1,34 +1,19 @@
-{% extends "baseInterna.html" %}
-
-{% load staticfiles %}
-
-{% block css %}
+{{#extend "baseinterna"}}
+  {{#content "css"}}
 <link rel="stylesheet" href="{% static 'css/setoresStyle.css' %}">
-{% endblock %}
+{{/content}}
 
-{% block main-title %}
-Setores
-{% endblock %}
+{{#content "mainTitle"}}Setores{{/content}}
 
-{% block body %}
+{{#content "body"}}
 
-{% if form.errors %}
-<div id="form-error">
-	<p>The operation could not be performed because one or more error(s) occurred.<br />Please resubmit the form after making the following changes:</p>
-	<ul>
-		{% for field in form %}
-		<li> {{ field.name }} {{ field.errors|striptags }}</li>
-		{% endfor %}
-	</ul>
-</div>
-{% endif %}
+
 
 <div id="cadastrarSetor">
 	<h2 id="cadastrarTitulo">Cadastrar setor</h2>	
 
 	<form id = "cadastrarSetor" action ="{%url 'CadastrarSetor'%}" method="post">
 
-		{% csrf_token %}
 		<div class="cadastrar-form-div">
 			<label for="inputNome">Nome</label>
 			<input type="text" name="nome" id="inputNome" class="cadastrar-form-input" placeholder="">
@@ -56,7 +41,6 @@ Setores
 	<h2 id="removerTitulo">Remover setor</h2>
 	
 	<form id = "removerSetor" action ="{%url 'RemoverSetor'%}" method="post">
-		{% csrf_token %}
 		<div class="cadastrar-form-div">
 			<label for="inputSetor">Setor</label><br/>
 			<select name="removeSetor">
@@ -74,7 +58,5 @@ Setores
 	</form>
 	
 </div>
-{% endblock %}
-
-{% block scripts %}
-{% endblock %}
+{{/content}}
+{{/extend}}
