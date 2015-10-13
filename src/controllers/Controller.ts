@@ -32,7 +32,7 @@ class Controller {
         reply.view(TEMPLATE_NAMES.NEW_COMPANY);
     }
 
-    public newPartnerCompanyPOST(request, reply) : void {
+    public newPartnerCompanyPOST = (request, reply) => {
         var partnerCompany = PartnerCompanyModel.hydrateFromPlainObject(request.payload);
 
         this.facade.insertPartnerCompany(partnerCompany, (err, object) => {
