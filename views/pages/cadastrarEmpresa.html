@@ -67,7 +67,11 @@
 
       <div class="cadastrar-form-div"><br/>
         <label for="endereco">Endereço</label><br /> <br/>
-        
+
+        <label for="inputCEP">CEP</label><br />
+        <input type="text" name="address.zip" id="inputCEP" class="cadastrar-form-input" placeholder="">
+        <button id="address-finder-btn">Localizar</button><br />
+
         <label for="inputRua">Rua</label><br />
         <input type="text" name="address.street" id="inputRua" class="cadastrar-form-input" placeholder="">
 
@@ -82,20 +86,46 @@
 
         <label for="inputEstado">Estado</label><br />
         <input type="text" name="address.state" id="inputEstado" class="cadastrar-form-input" placeholder="">
-
-        <label for="inputCEP">CEP</label><br />
-        <input type="text" name="address.zip" id="inputCEP" class="cadastrar-form-input" placeholder="">
       </div>
-
-
-      <!-- <div class="atualizar-form-div">
-        <label for="iniciativas">Iniciativas</label><br />
-        {{ form.iniciativas }}
-      </div> -->
 
       <div id="cadastrarButtonDiv" class="cadastrar-form-div">
         <input id="cadastrarButton" type="submit" value="Cadastrar">
       </div>
     </form>
+  {{/content}}
+
+  {{#content "scripts"}}
+  <script>
+    $(document).ready(function() {
+      var $zipField = $('#inputCEP');
+      var $streetField = $('#inputRua');
+      var $neighborhoodField = $('#inputBairro');
+      var $cityField = $('#inputCidade');
+      var $stateField = $('#inputEstado');
+      var $addressFinderBtn = $('#address-finder-btn');
+
+      $addressFinderBtn.click(function(evt) {
+        evt.preventDefault();
+
+        var zipCode = $zipField.val();
+        $addressFinderBtn.html("Localizando...");
+
+        $.ajax({
+          url: '/findAddress/'+zipCode,
+          method: 'GET',
+          dataType: 'json'
+        }).done(function(data) {
+          $streetField.val(data.street);
+          $neighborhoodField.val(data.neighborhood);
+          $cityField.val(data.city);
+          $stateField.val(data.state);
+        }).fail(function() {
+          alert("Um erro ocorreu ao tentar localizar o endereço a partir do CEP fornecido!")
+        }).always(function() {
+          $addressFinderBtn.html("Localizar");
+        });
+      });
+    });
+  </script>
   {{/content}}
 {{/extend}}

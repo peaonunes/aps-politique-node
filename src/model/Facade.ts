@@ -82,7 +82,7 @@ class Facade {
         this.partnerCompanyControl.getPartnerCompanies(callback);
     }
 
-    public findAddress(zip: string, callback: (address: Address) => void): void {
+    public findAddress(zip: string, callback: (err: any, address: Address) => void): void {
 		this.addressFinderSubsystem.findAddress(zip, callback);
     }
 
