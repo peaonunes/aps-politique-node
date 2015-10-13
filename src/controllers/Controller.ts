@@ -64,11 +64,19 @@ class Controller {
     }
 
     public searchCompanies = (request, reply) => {
-        this.facade.getPartnerCompanies((err, companies) => {
-            console.log(companies);
+        var processedQuery = {};
+
+        for (var key in request.query) {
+            if (request.query.hasOwnProperty(key)) {
+                if (typeof request.query[key] === 'string') {
+                    processedQuery[key] = { '$regex' : new RegExp(`.*${request.query[key]}.*`, 'i') }
+                }
+            }
+        }
+
+        this.facade.getPartnerCompanies(processedQuery, (err, companies) => {
             reply.view(TEMPLATE_NAMES.SEARCH_COMPANY, { 'companies': companies });
         });
-      
     }
 
     public searchEvents(request, reply) : void {

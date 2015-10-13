@@ -59,8 +59,8 @@ class Facade {
         this.partnerCompanyControl.updatePartnerCompany(company, callback)
     }
 
-    public getPartnerCompanies(callback: (err: any, companies: Object[]) => void) : void {
-        this.partnerCompanyControl.getPartnerCompanies(callback);
+    public getPartnerCompanies(query : any, callback: (err: any, companies: Object[]) => void) : void {
+        this.partnerCompanyControl.getPartnerCompanies(query, callback);
     }
 }
 
