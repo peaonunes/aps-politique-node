@@ -4,6 +4,8 @@ import Mongoose = require('mongoose');
 
 import Facade = require('../model/Facade');
 import ERepositoryType = require("../model/data/utils/ERepositoryType");
+import EAddressFinderSubsystemType = require("../model/subsystems/EAddressFinderSubsystemType");
+
 
 var PartnerCompanyModel = Mongoose.model('PartnerCompanies');
 
@@ -21,7 +23,7 @@ class Controller {
     private facade: Facade;
 
     constructor() {
-        this.facade = new Facade(ERepositoryType.ERepositoryType.ERepositoryType.mongoose);
+        this.facade = new Facade(ERepositoryType.ERepositoryType.ERepositoryType.mongoose, EAddressFinderSubsystemType.EAddressFinderSubsystemType.EAddressFinderSubsystemType.correios);
     }
 
     public home(request, reply) : void {
