@@ -8,6 +8,7 @@ import IAddressFinder = require("./subsystems/IAddressFinder");
 import EAddressFinderSubsystemType = require("./subsystems/EAddressFinderSubsystemType");
 import CorreriosAdapter = require("./subsystems/CorreiosAdapter");
 import Address = require("./data/common/Address");
+import ConfigurationFile = require("../ConfigurationFile");
 
 class Facade {
 
@@ -17,8 +18,8 @@ class Facade {
 	// Controls of the model application
 	private partnerCompanyControl: PartnerCompanyControl;
 
-	public constructor(repositoryType: ERepositoryType.ERepositoryType.ERepositoryType, addressFinderType: EAddressFinderSubsystemType.EAddressFinderSubsystemType.EAddressFinderSubsystemType){
-		this.init(repositoryType, addressFinderType);
+	public constructor(){
+		this.init();
 	}
 
 	// ###################################################################################
@@ -26,9 +27,9 @@ class Facade {
 	// ###################################################################################
 	
 	// Setup all the contols and repositories 
-	private init(repositoryType: ERepositoryType.ERepositoryType.ERepositoryType, addressFinderType: EAddressFinderSubsystemType.EAddressFinderSubsystemType.EAddressFinderSubsystemType){
-		var repostitoryFactory = this.createRepositoryFactory(repositoryType);
-		this.addressFinderSubsystem = this.createAddressFinderSubsystem(addressFinderType)
+	private init(){
+		var repostitoryFactory = this.createRepositoryFactory(ConfigurationFile.ConfigurationFile.Configuration.DATABASE);
+		this.addressFinderSubsystem = this.createAddressFinderSubsystem(ConfigurationFile.ConfigurationFile.Configuration.ADDRESSFINDER);
 		this.createControls(repostitoryFactory);
 	}
 
@@ -38,7 +39,7 @@ class Facade {
 				return new RepositoryMongooseFactory();
 			    break;
 			case ERepositoryType.ERepositoryType.ERepositoryType.memory:  
-				// TODO: ... 
+				return null;
 				break;
 		}
 	}
