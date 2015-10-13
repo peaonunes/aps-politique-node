@@ -76,8 +76,7 @@ PartnerCompanySchema.statics.hydrateFromPlainObject = function(companyObject: an
 };
 
 PartnerCompanySchema.statics.dehydrate = function(company: PartnerCompany) : Object {
-    return {
-        _id: company.id,
+    var result = {
         name: company.name,
         branch: company.branch,
         background: company.background,
@@ -93,6 +92,12 @@ PartnerCompanySchema.statics.dehydrate = function(company: PartnerCompany) : Obj
             zip: company.address.zip
         }
     };
+
+    if (company.id) {
+        result["_id"] = company.id;
+    }
+
+    return result;
 };
 
 export = PartnerCompanySchema;
