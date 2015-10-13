@@ -4,14 +4,21 @@ import IPartnerCompanyRepository = require("./data/partnerCompany/repository/IPa
 import ERepositoryType = require("./data/utils/ERepositoryType");
 import RepositoryBaseFactory = require("./data/utils/RepositoryBaseFactory");
 import RepositoryMongooseFactory = require("./data/utils/RepositoryMongooseFactory");
+import IAddressFinder = require("./subsystems/IAddressFinder");
+import EAddressFinderSubsystemType = require("./subsystems/EAddressFinderSubsystemType");
+import CorreriosAdapter = require("./subsystems/CorreiosAdapter");
+import Address = require("./data/common/Address");
 
 class Facade {
 
-	// Controls of the model application
-	partnerCompanyControl: PartnerCompanyControl;
+	// Address Finder Subsystem
+	private addressFinderSubsystem: IAddressFinder;
 
-	public constructor(repositoryType: ERepositoryType.ERepositoryType.ERepositoryType){
-		this.init(repositoryType);
+	// Controls of the model application
+	private partnerCompanyControl: PartnerCompanyControl;
+
+	public constructor(repositoryType: ERepositoryType.ERepositoryType.ERepositoryType, addressFinderType: EAddressFinderSubsystemType.EAddressFinderSubsystemType.EAddressFinderSubsystemType){
+		this.init(repositoryType, addressFinderType);
 	}
 
 	// ###################################################################################
@@ -19,8 +26,9 @@ class Facade {
 	// ###################################################################################
 	
 	// Setup all the contols and repositories 
-	private init(repositoryType: ERepositoryType.ERepositoryType.ERepositoryType){
+	private init(repositoryType: ERepositoryType.ERepositoryType.ERepositoryType, addressFinderType: EAddressFinderSubsystemType.EAddressFinderSubsystemType.EAddressFinderSubsystemType){
 		var repostitoryFactory = this.createRepositoryFactory(repositoryType);
+		this.addressFinderSubsystem = this.createAddressFinderSubsystem(addressFinderType)
 		this.createControls(repostitoryFactory);
 	}
 
@@ -31,6 +39,17 @@ class Facade {
 			    break;
 			case ERepositoryType.ERepositoryType.ERepositoryType.memory:  
 				// TODO: ... 
+				break;
+		}
+	}
+
+	private createAddressFinderSubsystem(addressFinderType: EAddressFinderSubsystemType.EAddressFinderSubsystemType.EAddressFinderSubsystemType){
+		switch(addressFinderType){
+			case EAddressFinderSubsystemType.EAddressFinderSubsystemType.EAddressFinderSubsystemType.correios:
+				return new CorreriosAdapter();
+				break;
+			case EAddressFinderSubsystemType.EAddressFinderSubsystemType.EAddressFinderSubsystemType.unknow:
+				return null;
 				break;
 		}
 	}
@@ -62,6 +81,11 @@ class Facade {
     public getPartnerCompanies(callback: (err: any, companies: Object[]) => void) : void {
         this.partnerCompanyControl.getPartnerCompanies(callback);
     }
+
+    public findAddress(zip: string, callback: (address: Address) => void): void {
+		this.addressFinderSubsystem.findAddress(zip, callback);
+    }
+
 }
 
 export = Facade;
