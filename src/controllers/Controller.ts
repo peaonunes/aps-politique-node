@@ -63,8 +63,12 @@ class Controller {
         reply('profile');
     }
 
-    public searchCompanies(request, reply) : void {
-        reply(TEMPLATE_NAMES.SEARCH_COMPANY);
+    public searchCompanies = (request, reply) => {
+        this.facade.getPartnerCompanies((err, companies) => {
+            console.log(companies);
+            reply.view(TEMPLATE_NAMES.SEARCH_COMPANY, { 'companies': companies });
+        });
+      
     }
 
     public searchEvents(request, reply) : void {
