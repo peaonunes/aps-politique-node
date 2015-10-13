@@ -23,7 +23,7 @@ class Controller {
     private facade: Facade;
 
     constructor() {
-        this.facade = new Facade(ERepositoryType.ERepositoryType.ERepositoryType.mongoose, EAddressFinderSubsystemType.EAddressFinderSubsystemType.EAddressFinderSubsystemType.correios);
+        this.facade = new Facade();
     }
 
     public home(request, reply) : void {
