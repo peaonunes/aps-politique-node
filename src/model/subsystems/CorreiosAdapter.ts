@@ -6,8 +6,10 @@ class CorreiosAdapter implements IAddressFinder {
 
 	public constructor() { }
 
-	public findAddress(zip: string, callback: (address: Address) => void): void {
-		var json = CorreiosMiddleware.findAddress(zip, function(data: string) {
+	public findAddress(zip: string, callback: (err: any, address: Address) => void): void {
+		CorreiosMiddleware.findAddress(zip, (err: any, data: string) => {
+			if (err) callback(err, null);
+
 			var rawAddress = JSON.parse(data);
 			var address = new Address(
 				rawAddress.logradouro,
@@ -16,7 +18,7 @@ class CorreiosAdapter implements IAddressFinder {
 				rawAddress.localidade,
 				rawAddress.uf,
 				rawAddress.cep);
-			callback(address);
+			callback(null, address);
 		});
 	}
 }

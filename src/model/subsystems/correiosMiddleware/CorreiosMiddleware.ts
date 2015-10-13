@@ -4,13 +4,13 @@ import http = require("http");
 
 class CorreiosMiddleware{
 
-	public static findAddress(zip: string, callback: (data:string) => void) : void {
+	public static findAddress(zip: string, callback: (err: any, data:string) => void) : void {
 		var options = {
 			host: 'cep.correiocontrol.com.br',
 			path: `/${zip}.json`
 		};
 
-		http.request(options, function(response) {
+		http.get(options, function(response) {
 			var str = '';
 
 			response.on('data', function (chunk) {
@@ -18,9 +18,11 @@ class CorreiosMiddleware{
 		  	});
 
 			response.on('end', function () {
-				callback(str);
+				callback(null, str);
 			});
-		}).end();
+		}).on('error', function(err) {
+			callback(err, null);
+		})
 	}
 }
 

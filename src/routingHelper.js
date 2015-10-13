@@ -53,6 +53,11 @@ routes = [
     method: 'POST',
     path: '/companies/new',
     name: 'newPartnerCompanyPOST'
+  },
+  {
+    method: 'GET',
+    path: '/findAddress/{zip}',
+    name: 'findAddress'
   }
 ];
 

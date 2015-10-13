@@ -77,6 +77,16 @@ class Controller {
         reply(TEMPLATE_NAMES.SEARCH_EVENT);
     }
 
+    public findAddress = (request, reply) => {
+        var zipCode = request.params.zip;
+
+        this.facade.findAddress(zipCode, (err, address) => {
+            if (err) throw err;
+
+            reply(address);
+        });
+    }
+
 }
 
 export = Controller;
