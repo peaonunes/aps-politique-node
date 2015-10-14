@@ -1,9 +1,27 @@
-var Controller = require('./controllers/Controller');
+var FindAddressController = require('./controllers/FindAddressController');
+var HomeController = require('./controllers/HomeController');
+var NewPartnerCompanyController = require('./controllers/NewPartnerCompanyController');
+var NewEventController = require('./controllers/NewEventController');
+var NewMemberController = require('./controllers/NewMemberController');
+var SearchPartnerCompaniesController = require('./controllers/SearchPartnerCompaniesController');
+var SearchEventsController = require('./controllers/SearchEventsController');
+var SearchMembersController = require('./controllers/SearchMembersController');
 var routingHelper = require('./routingHelper');
 
 var routes = routingHelper.routes;
 var setupRoute = routingHelper.setupRoute;
-var controller = new Controller();
+
+var controllers = {
+  homeController : new HomeController(),
+  findAddressController : new FindAddressController(),
+  newPartnerCompanyController : new NewPartnerCompanyController(),
+  newEventController : new NewEventController(),
+  newMemberController : new NewMemberController(),
+  searchPartnerCompaniesController : new SearchPartnerCompaniesController(),
+  searchEventsController : new SearchEventsController(),
+  searchMembersController : new SearchMembersController()
+};
+
 
 function configureRoutes(server) {
   // Route configuration for static files
@@ -18,7 +36,7 @@ function configureRoutes(server) {
   });
 
   for (var i = 0; i < routes.length; i++) {
-    setupRoute(server, routes[i], controller);
+    setupRoute(server, routes[i], controllers);
   }
 }
 
