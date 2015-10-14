@@ -11,6 +11,8 @@ import Address = require("./data/common/Address");
 import ConfigurationFile = require("../ConfigurationFile");
 
 class Facade {
+	//singleton instance
+	private static instance: Facade;
 
 	// Address Finder Subsystem
 	private addressFinderSubsystem: IAddressFinder;
@@ -18,8 +20,16 @@ class Facade {
 	// Controls of the model application
 	private partnerCompanyControl: PartnerCompanyControl;
 
-	public constructor(){
+	constructor(){
 		this.init();
+	}
+
+	public static getInstance() {
+		if (!Facade.instance) {
+			Facade.instance = new Facade();
+		}
+
+		return Facade.instance;
 	}
 
 	// ###################################################################################
