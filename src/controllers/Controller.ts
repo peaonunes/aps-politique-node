@@ -70,6 +70,12 @@ class Controller {
             if (request.query.hasOwnProperty(key)) {
                 if (typeof request.query[key] === 'string') {
                     processedQuery[key] = { '$regex' : new RegExp(`.*${request.query[key]}.*`, 'i') }
+                } else if (key === 'address'){
+                    for (var key2 in request.query[key]){
+                        if (typeof request.query[key][key2] === 'string') {
+                            processedQuery[key+'.'+key2] = { '$regex': new RegExp(`.*${request.query[key][key2]}.*`, 'i') }
+                        }
+                    }
                 }
             }
         }
