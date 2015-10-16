@@ -21,8 +21,8 @@ class PartnerCompanyRegister {
 		this.repository.updatePartnerCompany(partnerCompany, callback);
 	}
 
-	public getPartnerCompanies(callback: (err: any, docs: Object[]) => void): void {
-		return this.repository.getPartnerCompanies(callback);
+	public getPartnerCompanies(query : any, callback: (err: any, docs: Object[]) => void): void {
+		return this.repository.getPartnerCompanies(query, callback);
 	}
 
 }

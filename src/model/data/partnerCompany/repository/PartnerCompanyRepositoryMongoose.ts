@@ -26,8 +26,11 @@ class PartnerCompanyRepositoryMongoose implements IPartnerCompanyRepository {
         PartnerCompanyModel.findByIdAndUpdate(partnerCompany.id, { $set : serializedCompany }, callback);
 	}
 
-	public getPartnerCompanies(callback: <T extends Mongoose.Document>(err: any, docs: T[]) => void) : void {
-		PartnerCompanyModel.find({}, callback);
+	public getPartnerCompanies(query : any , callback: <T extends Mongoose.Document>(err: any, docs: T[]) => void) : void {
+		if (!query){
+			query = {};
+		}
+		PartnerCompanyModel.find(query, callback);
 	}
 
 }
