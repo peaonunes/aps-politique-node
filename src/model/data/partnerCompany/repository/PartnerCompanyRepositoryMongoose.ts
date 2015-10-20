@@ -4,6 +4,7 @@ import Mongoose = require('mongoose');
 
 import IPartnerCompanyRepository = require('./IPartnerCompanyRepository');
 import PartnerCompany = require('../entities/PartnerCompany');
+import Query = require("../../common/Query")
 
 var PartnerCompanyModel = Mongoose.model('PartnerCompanies');
 
@@ -26,11 +27,16 @@ class PartnerCompanyRepositoryMongoose implements IPartnerCompanyRepository {
         PartnerCompanyModel.findByIdAndUpdate(partnerCompany.id, { $set : serializedCompany }, callback);
 	}
 
-	public getPartnerCompanies(query : any , callback: <T extends Mongoose.Document>(err: any, docs: T[]) => void) : void {
+	public getPartnerCompanies(query : Query , callback: <T extends Mongoose.Document>(err: any, docs: T[]) => void) : void {
+		var actQuery : Object;
 		if (!query){
-			query = {};
+			actQuery = {};
+		} else {
+			actQuery = query.dict;
 		}
-		PartnerCompanyModel.find(query, callback);
+		console.log(typeof(actQuery));
+		console.log(actQuery);
+		PartnerCompanyModel.find(actQuery, callback);
 	}
 
 }

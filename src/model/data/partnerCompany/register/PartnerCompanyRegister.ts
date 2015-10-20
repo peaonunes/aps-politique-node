@@ -1,5 +1,6 @@
 import IPartnerCompanyRepository = require("../repository/IPartnerCompanyRepository");
 import PartnerCompany = require("../entities/PartnerCompany");
+import Query = require("../../common/Query")
 
 class PartnerCompanyRegister {
 
@@ -21,7 +22,7 @@ class PartnerCompanyRegister {
 		this.repository.updatePartnerCompany(partnerCompany, callback);
 	}
 
-	public getPartnerCompanies(query : any, callback: (err: any, docs: Object[]) => void): void {
+	public getPartnerCompanies(query : Query, callback: (err: any, docs: Object[]) => void): void {
 		return this.repository.getPartnerCompanies(query, callback);
 	}
 
