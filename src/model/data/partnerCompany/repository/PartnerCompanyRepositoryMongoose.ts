@@ -28,14 +28,12 @@ class PartnerCompanyRepositoryMongoose implements IPartnerCompanyRepository {
 	}
 
 	public getPartnerCompanies(query : Query , callback: <T extends Mongoose.Document>(err: any, docs: T[]) => void) : void {
-		var actQuery : Object;
+		var actQuery;
 		if (!query){
 			actQuery = {};
 		} else {
 			actQuery = query.dict;
 		}
-		console.log(typeof(actQuery));
-		console.log(actQuery);
 		PartnerCompanyModel.find(actQuery, callback);
 	}
 
