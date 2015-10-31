@@ -1,5 +1,5 @@
 $(document).ready(function(){
-    addRowHandlers();
+   // addRowHandlers();
     
     $(document).click( function(e){
 
@@ -57,21 +57,14 @@ function showModal(){
     }
 }
 
-$('#inputPesquisa').bind('input', filtrarEvento);
 
-function filtrarEvento(){
-   
-    var pesquisaString = $(this).val();
-    var variavel = $('#cmb-variavel option:selected').text();
+function searchCompanies(url){
+    if (!$('#inputPesquisa').val()){
+        window.location = url;
+    } else {
+        var redirect = url + '?';
+        redirect += $('#cmb-variavel').val() + '=' + $('#inputPesquisa').val()
+        window.location = redirect;
+    }
+}
 
-    var filtrados = $('.'+variavel).filter(function(index) {
-      return (this.innerHTML.toLowerCase().indexOf(pesquisaString.toLowerCase()) != -1)
-    }).parent();
-      
-    var naoFiltrados = $('.'+variavel).filter(function(index) {
-      return (this.innerHTML.toLowerCase().indexOf(pesquisaString.toLowerCase()) == -1)
-    }).parent();
-
-    filtrados.show();
-    naoFiltrados.hide();
-};

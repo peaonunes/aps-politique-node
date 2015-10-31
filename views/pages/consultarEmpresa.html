@@ -54,42 +54,71 @@
 			</form>				
 		</div><!-- /.modal -->
 
-		<form id="consultarIniciativa-form" action="{{getUrl 'searchCompanies'}}" method="post"> <!-- action correto? -->
+		<form id="consultarIniciativa-form"> <!-- action correto? -->
 
 			<div class="consultar-form-div">
 				<label for="inputEmpresasVar">Variável</label><br />
 				<select name="inputEmpresasVar" id="cmb-variavel">
-					{% for instance in empresas|slice:"1" %}
-						{% for field, value in instance.fields.items %}
-						<option value="{{field}}">{{field}}</option>
-						{% endfor %}
-						{% endfor %}
+						<option value="name"> Nome </option>
+						<option value="branch"> Ramo </option>
+						<option value="background"> Background </option>
+						<option value="support"> Apoios </option>
+						<option value="supportProposal"> Propostas de apoio</option>
+						<option value="partnershipType"> Tipo de parceria </option>
+						<option value="address.street"> Rua </option>
+						<option value="address.num"> Numero </option>
+						<option value="address.neighborhood"> Bairro </option>
+						<option value="address.city"> Cidade </option>
+						<option value="address.state"> Estado </option>
+						<option value="address.zip"> CEP </option>
 				</select>
 			</div>
 
 			<div class="consultar-form-div">
 				<label for="inputNome">Pesquisa</label>
-				<input type="text" name="first_name" id="inputPesquisa" class="consultar-form-input" placeholder="">
+				<input type="text" id="inputPesquisa" class="consultar-form-input" placeholder="">
+				<input type="button" value="Pesquisar" onclick="searchCompanies('{{getUrl 'searchCompanies'}}')">
 			</div>
 
 			<div class="consultar-form-div">
-						<table id="tabela">
+				<table id="tabela">
 					<tr>
-						{% for instance in empresas|slice:"1" %}
-						{% for field, value in instance.fields.items %}
-						<th>{{field}}</th>
-						{% endfor %}
-						{% endfor %}
+						<th>Nome</th>
+						<th>Ramo</th>
+						<th>Background</th>
+						<th>Apoios</th>
+						<th>Propostas de apoio</th>
+						<th>Tipo de parceria</th>
+						<th>Rua</th>
+						<th>Numero</th>
+						<th>Bairro</th>
+						<th>Cidade</th>
+						<th>Estado</th>
+						<th>CEP</th>
 					</tr>
+				{{#each companies}}
+					<tr>
+						<td class="Name">{{ name }}</td>
+						<td class="Branch">{{ branch }}</td>
+						<td class="Background">{{ background }}</td>
+						<td class="Support">{{ support }}</td>
+						<td class="Support Proposal">{{ supportProposal }}</td>
+						<td class="Partnership Type">{{ partnershipType }}</td>
+						<td class="street">{{ address.street }}</td>
+						<td class="num">{{ address.num }}</td>
+						<td class="neighborhood">{{ address.neighborhood }}</td>
+						<td class="city">{{ address.city }}</td>
+						<td class="state">{{ address.state }}</td>
+						<td class="zip">{{ address.zip }}</td>
+					</tr>
+				{{/each}}
+						<!--
+						<tr onclick="ClickHandler(this, '{{instance.pk}}', '{{ csrf_token }}', event, '{% url 'RemoverEmpresa' instance.pk %}', '{% url 'EditarEmpresa' instance.pk %}')" class="tabela-linha">-->
 
-				{% for instance in empresas %}
-					<tr onclick="ClickHandler(this, '{{instance.pk}}', '{{ csrf_token }}', event, '{% url 'RemoverEmpresa' instance.pk %}', '{% url 'EditarEmpresa' instance.pk %}')" class="tabela-linha">
-				{% for field, value in instance.fields.items %}
-				<td class="{{field}}">{{ value }}</td>
-				{% endfor %}
-			</tr>
-				{% endfor %}
-			</table>
+				
+
+			
+				</table>
 			</div>
 
 			<ul id="dropdown" role="menu" hidden aria-labelledby="menuitems">

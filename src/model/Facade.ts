@@ -9,6 +9,7 @@ import EAddressFinderSubsystemType = require("./subsystems/EAddressFinderSubsyst
 import CorreriosAdapter = require("./subsystems/CorreiosAdapter");
 import Address = require("./data/common/Address");
 import ConfigurationFile = require("../ConfigurationFile");
+import Query = require("./data/common/Query");
 
 class Facade {
 	//singleton instance
@@ -89,8 +90,9 @@ class Facade {
         this.partnerCompanyControl.updatePartnerCompany(company, callback)
     }
 
-    public getPartnerCompanies(callback: (err: any, companies: Object[]) => void) : void {
-        this.partnerCompanyControl.getPartnerCompanies(callback);
+    public getPartnerCompanies(query : any, callback: (err: any, companies: Object[]) => void) : void {
+		var quer = new Query(query);
+        this.partnerCompanyControl.getPartnerCompanies(quer, callback);
     }
 
     public findAddress(zip: string, callback: (err: any, address: Address) => void): void {

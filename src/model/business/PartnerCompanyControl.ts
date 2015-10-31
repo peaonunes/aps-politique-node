@@ -1,6 +1,7 @@
 import PartnerCompanyRegister = require("../data/partnerCompany/register/PartnerCompanyRegister");
 import PartnerCompany = require("../data/partnerCompany/entities/PartnerCompany");
 import IPartnerCompanyRepository = require("../data/partnerCompany/repository/IPartnerCompanyRepository");
+import Query = require("../data/common/Query")
 
 class PartnerCompanyControl {
 
@@ -22,8 +23,8 @@ class PartnerCompanyControl {
 		this.partnerCompanyRegister.updatePartnerCompany(partnerCompany, callback);
 	}
 
-	getPartnerCompanies(callback: (err: any, docs: Object[]) => void): void {
-		this.partnerCompanyRegister.getPartnerCompanies(callback);
+	getPartnerCompanies(query: Query, callback: (err: any, docs: Object[]) => void): void {
+		this.partnerCompanyRegister.getPartnerCompanies(query, callback);
 	}
 
 }
